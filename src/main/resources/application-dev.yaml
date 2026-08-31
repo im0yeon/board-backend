@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:mysql://dev-db-host:3306/mydb?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  flyway:
+    clean-disabled: true
+
+logging:
+  level:
+    com.example.myapp.mapper: debug

@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: board
+  profiles:
+    default: local
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    baseline-version: 0
+    locations: classpath:data/flyway
+    validate-on-migrate: true
+
+mybatis:
+  type-aliases-package: com.example.myapp.domain
+  mapper-locations: classpath:data/mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    jdbc-type-for-null: NULL
+    default-fetch-size: 100
+    default-statement-timeout: 30
