@@ -1,3 +1,6 @@
+server:
+  port: 28188
+
 spring:
   application:
     name: board
@@ -24,3 +27,13 @@ decorator:
       logging: slf4j
       multiline: false
       log-format: "%(executionTime)ms | %(category) | %(sql)"
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+    tags-sorter: alpha
+    display-request-duration: true
+  default-produces-media-type: application/json

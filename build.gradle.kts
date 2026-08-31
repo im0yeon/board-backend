@@ -26,12 +26,14 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-log4j2")
 	implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:4.1.0")
 	implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:2.0.1")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.1.0")
 
 	implementation("org.springframework.boot:spring-boot-flyway")
 	implementation("org.flywaydb:flyway-core")
 	implementation("org.flywaydb:flyway-mysql")
 
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
+	developmentOnly("org.springframework.boot:spring-boot-h2console")
 
 	compileOnly("org.projectlombok:lombok")
 	annotationProcessor("org.projectlombok:lombok")

@@ -7,6 +7,7 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import com.imooyoni.board.common.BaseException;
 import com.imooyoni.board.common.BaseResponse;
@@ -34,7 +35,7 @@ public class GlobalExceptionHandler {
 		log.warn("입력값 검증 실패: {}", detail);
 
 		return ResponseEntity.status(ErrorCode.INVALID_INPUT.getStatus())
-				.body(BaseResponse.error(new BaseException(ErrorCode.INVALID_INPUT, detail)));
+				.body(BaseResponse.error(BaseException.of(ErrorCode.INVALID_INPUT, detail)));
 	}
 
 	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
@@ -43,6 +44,14 @@ public class GlobalExceptionHandler {
 
 		return ResponseEntity.status(ErrorCode.METHOD_NOT_ALLOWED.getStatus())
 				.body(BaseResponse.error(ErrorCode.METHOD_NOT_ALLOWED));
+	}
+
+	@ExceptionHandler(NoResourceFoundException.class)
+	public ResponseEntity<BaseResponse<Object>> handleNoResource(NoResourceFoundException e) {
+		log.warn("존재하지 않는 경로 요청: path={}", e.getResourcePath());
+
+		return ResponseEntity.status(ErrorCode.NOT_FOUND.getStatus())
+				.body(BaseResponse.error(ErrorCode.NOT_FOUND, "요청 경로"));
 	}
 
 	// 내부 오류 상세는 응답에 노출하지 않음
