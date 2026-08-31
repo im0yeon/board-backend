@@ -11,10 +11,16 @@ spring:
     validate-on-migrate: true
 
 mybatis:
-  type-aliases-package: com.example.myapp.domain
+  type-aliases-package: com.imooyoni.board.data.domain
   mapper-locations: classpath:data/mapper/**/*.xml
   configuration:
     map-underscore-to-camel-case: true
     jdbc-type-for-null: NULL
     default-fetch-size: 100
     default-statement-timeout: 30
+decorator:
+  datasource:
+    p6spy:
+      logging: slf4j
+      multiline: false
+      log-format: "%(executionTime)ms | %(category) | %(sql)"
