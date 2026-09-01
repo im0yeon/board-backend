@@ -23,6 +23,8 @@ repositories {
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-validation")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-log4j2")
 	implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:4.1.0")
 	implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:2.0.1")

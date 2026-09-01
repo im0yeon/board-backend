@@ -6,6 +6,10 @@ spring:
     name: board
   profiles:
     default: local
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
   flyway:
     enabled: true
     baseline-on-migrate: true
@@ -18,6 +22,7 @@ mybatis:
   mapper-locations: classpath:data/mapper/**/*.xml
   configuration:
     map-underscore-to-camel-case: true
+    local-cache-scope: STATEMENT
     jdbc-type-for-null: NULL
     default-fetch-size: 100
     default-statement-timeout: 30
