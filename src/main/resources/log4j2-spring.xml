@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Properties>
+        <Property name="PATTERN">%d{HH:mm:ss.SSS} %highlight{%-5level} %style{[%t]}{cyan} %style{%logger{1.}}{blue} : %msg%n%throwable</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${PATTERN}"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <!-- p6spy 실행 SQL -->
+        <Logger name="p6spy" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>
