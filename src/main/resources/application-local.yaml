@@ -11,5 +11,9 @@ spring:
 
 logging:
   level:
-    com.example.myapp.mapper: trace   # 매퍼 패키지 지정 — SQL과 바인딩 파라미터가 찍힘
+    com.imooyoni.board.data.mapper: trace   # 매퍼 패키지 지정 — SQL과 바인딩 파라미터가 찍힘
     org.flywaydb: debug
+decorator:
+  datasource:
+    p6spy:
+      enable-logging: true

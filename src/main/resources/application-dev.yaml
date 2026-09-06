@@ -7,6 +7,13 @@ spring:
   flyway:
     clean-disabled: true
 
+decorator:
+  datasource:
+    p6spy:
+      enable-logging: false
+
 logging:
   level:
-    com.example.myapp.mapper: debug
+    root: error
+    com.imooyoni.board.data.mapper: "off"
+    p6spy: "off"

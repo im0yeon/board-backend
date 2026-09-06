@@ -1,8 +1,15 @@
+server:
+  port: 28188
+
 spring:
   application:
     name: board
   profiles:
     default: local
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
   flyway:
     enabled: true
     baseline-on-migrate: true
@@ -11,10 +18,27 @@ spring:
     validate-on-migrate: true
 
 mybatis:
-  type-aliases-package: com.example.myapp.domain
+  type-aliases-package: com.imooyoni.board.data.domain
   mapper-locations: classpath:data/mapper/**/*.xml
   configuration:
     map-underscore-to-camel-case: true
+    local-cache-scope: STATEMENT
     jdbc-type-for-null: NULL
     default-fetch-size: 100
     default-statement-timeout: 30
+decorator:
+  datasource:
+    p6spy:
+      logging: slf4j
+      multiline: false
+      log-format: "%(executionTime)ms | %(category) | %(sql)"
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+    tags-sorter: alpha
+    display-request-duration: true
+  default-produces-media-type: application/json
