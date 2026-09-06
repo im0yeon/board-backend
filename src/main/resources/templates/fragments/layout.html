@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(pageTitle)">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title th:text="${pageTitle}">Board Admin</title>
+<link rel="stylesheet" th:href="@{/assets/css/tokens.css}">
+<link rel="stylesheet" th:href="@{/assets/css/components.css}">
+</head>
+<body>
+<header class="app-header" th:fragment="header(active)">
+  <a class="app-header__logo" th:href="@{/articles}">Board Admin</a>
+  <div class="app-header__spacer"></div>
+  <nav class="app-header__nav">
+    <a class="app-header__nav-link" th:classappend="${active == 'styleguide'} ? 'is-active'" th:href="@{/guide/styleguide}">스타일 가이드</a>
+    <a class="app-header__nav-link" th:classappend="${active == 'alerts'} ? 'is-active'" th:href="@{/guide/alerts}">얼럿 가이드</a>
+  </nav>
+</header>
+</body>
+</html>

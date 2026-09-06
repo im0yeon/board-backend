@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('스타일 가이드 | Board Admin')}"></head>
+<body>
+<div class="app">
+  <header th:replace="~{fragments/layout :: header('styleguide')}"></header>
+
+  <div class="app-body">
+
+    <main class="app-main">
+      <div class="page-head page-head--stacked">
+        <nav class="breadcrumb"><span>참고</span><span>스타일 가이드</span></nav>
+        <h1 class="page-head__title">스타일 가이드</h1>
+      </div>
+
+      <div style="flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column;gap:var(--spacing-xl)">
+
+        <!-- ========== Color ========== -->
+        <section class="panel">
+          <div class="panel__header"><h2 class="panel__title">Color</h2></div>
+          <div class="panel__body">
+            <p style="margin-bottom:var(--spacing-md);font-size:var(--font-size-xs);font-weight:var(--font-weight-medium);color:var(--text-muted)">NEUTRAL</p>
+            <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:var(--spacing-md);margin-bottom:var(--spacing-2xl)">
+              <div>
+                <div style="height:56px;border-radius:var(--radius-md);border:1px solid var(--border-default);background:#f8f9fb"></div>
+                <p style="margin-top:6px;font-size:var(--font-size-xs);font-weight:var(--font-weight-medium);color:var(--text-strong)">gray-50</p>
+                <p style="font-size:var(--font-size-2xs);color:var(--text-muted);font-family:ui-monospace,monospace">#f8f9fb</p>
+              </div>
+              <div>
+                <div style="height:56px;border-radius:var(--radius-md);border:1px solid var(--border-default);background:#f1f3f6"></div>
+                <p style="margin-top:6px;font-size:var(--font-size-xs);font-weight:var(--font-weight-medium);color:var(--text-strong)">gray-100</p>
+                <p style="font-size:var(--font-size-2xs);color:var(--text-muted);font-family:ui-monospace,monospace">#f1f3f6</p>
+              </div>
+              <div>
+                <div style="height:56px;border-radius:var(--radius-md);border:1px solid var(--border-default);background:#e5e8ee"></div>
+                <p style="margin-top:6px;font-size:var(--font-size-xs);font-weight:var(--font-weight-medium);color:var(--text-strong)">gray-200</p>
+                <p style="font-size:var(--font-size-2xs);color:var(--text-muted);font-family:ui-monospace,monospace">#e5e8ee</p>
+              </div>
+              <div>
+                <div style="height:56px;border-radius:var(--radius-md);border:1px solid var(--border-default);background:#d4d9e2"></div>
+                <p style="margin-top:6px;font-size:var(--font-size-xs);font-weight:var(--font-weight-medium);color:var(--text-strong)">gray-300</p>
+                <p style="font-size:var(--font-size-2xs);color:var(--text-muted);font-family:ui-monospace,monospace">#d4d9e2</p>
+              </div>
+              <div>
+                <div style="height:56px;border-radius:var(--radius-md);border:1px solid var(--border-default);background:#aeb5c3"></div>
+                <p style="margin-top:6px;font-size:var(--font-size-xs);font-weight:var(--font-weight-medium);color:var(--text-strong)">gray-400</p>
+                <p style="font-size:var(--font-size-2xs);color:var(--text-muted);font-family:ui-monospace,monospace">#aeb5c3</p>
+              </div>
+              <div>
+                <div style="height:56px;border-radius:var(--radius-md);border:1px solid var(--border-default);background:#7b8496"></div>
+                <p style="margin-top:6px;font-size:var(--font-size-xs);font-weight:var(--font-weight-medium);color:var(--text-strong)">gray-500</p>
+                <p style="font-size:var(--font-size-2xs);color:var(--text-muted);font-family:ui-monospace,monospace">#7b8496</p>
+              </div>
+              <div>
+                <div style="height:56px;border-radius:var(--radius-md);border:1px solid var(--border-default);background:#5a6274"></div>
+                <p style="margin-top:6px;font-size:var(--font-size-xs);font-weight:var(--font-weight-medium);color:var(--text-strong)">gray-600</p>
+                <p style="font-size:var(--font-size-2xs);color:var(--text-muted);font-family:ui-monospace,monospace">#5a6274</p>
+              </div>
+              <div>
+                <div style="height:56px;border-radius:var(--radius-md);border:1px solid var(--border-default);background:#3d4453"></div>
+                <p style="margin-top:6px;font-size:var(--font-size-xs);font-weight:var(--font-weight-medium);color:var(--text-strong)">gray-700</p>
+                <p style="font-size:var(--font-size-2xs);color:var(--text-muted);font-family:ui-monospace,monospace">#3d4453</p>
+              </div>
+              <div>
+                <div style="height:56px;border-radius:var(--radius-md);border:1px solid var(--border-default);background:#262b36"></div>
+                <p style="margin-top:6px;font-size:var(--font-size-xs);font-weight:var(--font-weight-medium);color:var(--text-strong)">gray-800</p>
+                <p style="font-size:var(--font-size-2xs);color:var(--text-muted);font-family:ui-monospace,monospace">#262b36</p>
+              </div>
+              <div>
+                <div style="height:56px;border-radius:var(--radius-md);border:1px solid var(--border-default);background:#161a22"></div>
+                <p style="margin-top:6px;font-size:var(--font-size-xs);font-weight:var(--font-weight-medium);color:var(--text-strong)">gray-900</p>
+                <p style="font-size:var(--font-size-2xs);color:var(--text-muted);font-family:ui-monospace,monospace">#161a22</p>
+              </div>
+            </div>
+            <p style="margin-bottom:var(--spacing-md);font-size:var(--font-size-xs);font-weight:var(--font-weight-medium);color:var(--text-muted)">BRAND / STATUS</p>
+            <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:var(--spacing-md)">
+              <div>
+                <div style="height:56px;border-radius:var(--radius-md);border:1px solid var(--border-default);background:#eff5ff"></div>
+                <p style="margin-top:6px;font-size:var(--font-size-xs);font-weight:var(--font-weight-medium);color:var(--text-strong)">primary-50</p>
+                <p style="font-size:var(--font-size-2xs);color:var(--text-muted);font-family:ui-monospace,monospace">#eff5ff</p>
+              </div>
+              <div>
+                <div style="height:56px;border-radius:var(--radius-md);border:1px solid var(--border-default);background:#dbe7fe"></div>
+                <p style="margin-top:6px;font-size:var(--font-size-xs);font-weight:var(--font-weight-medium);color:var(--text-strong)">primary-100</p>
+                <p style="font-size:var(--font-size-2xs);color:var(--text-muted);font-family:ui-monospace,monospace">#dbe7fe</p>
+              </div>
+              <div>
+                <div style="height:56px;border-radius:var(--radius-md);border:1px solid var(--border-default);background:#2563eb"></div>
+                <p style="margin-top:6px;font-size:var(--font-size-xs);font-weight:var(--font-weight-medium);color:var(--text-strong)">primary-500</p>
+                <p style="font-size:var(--font-size-2xs);color:var(--text-muted);font-family:ui-monospace,monospace">#2563eb</p>
+              </div>
+              <div>
+                <div style="height:56px;border-radius:var(--radius-md);border:1px solid var(--border-default);background:#1d4ed8"></div>
+                <p style="margin-top:6px;font-size:var(--font-size-xs);font-weight:var(--font-weight-medium);color:var(--text-strong)">primary-600</p>
+                <p style="font-size:var(--font-size-2xs);color:var(--text-muted);font-family:ui-monospace,monospace">#1d4ed8</p>
+              </div>
+              <div>
+                <div style="height:56px;border-radius:var(--radius-md);border:1px solid var(--border-default);background:#dc2626"></div>
+                <p style="margin-top:6px;font-size:var(--font-size-xs);font-weight:var(--font-weight-medium);color:var(--text-strong)">danger-500</p>
+                <p style="font-size:var(--font-size-2xs);color:var(--text-muted);font-family:ui-monospace,monospace">#dc2626</p>
+              </div>
+              <div>
+                <div style="height:56px;border-radius:var(--radius-md);border:1px solid var(--border-default);background:#fef2f2"></div>
+                <p style="margin-top:6px;font-size:var(--font-size-xs);font-weight:var(--font-weight-medium);color:var(--text-strong)">danger-50</p>
+                <p style="font-size:var(--font-size-2xs);color:var(--text-muted);font-family:ui-monospace,monospace">#fef2f2</p>
+              </div>
+              <div>
+                <div style="height:56px;border-radius:var(--radius-md);border:1px solid var(--border-default);background:#16a34a"></div>
+                <p style="margin-top:6px;font-size:var(--font-size-xs);font-weight:var(--font-weight-medium);color:var(--text-strong)">success-500</p>
+                <p style="font-size:var(--font-size-2xs);color:var(--text-muted);font-family:ui-monospace,monospace">#16a34a</p>
+              </div>
+              <div>
+                <div style="height:56px;border-radius:var(--radius-md);border:1px solid var(--border-default);background:#f0fdf4"></div>
+                <p style="margin-top:6px;font-size:var(--font-size-xs);font-weight:var(--font-weight-medium);color:var(--text-strong)">success-50</p>
+                <p style="font-size:var(--font-size-2xs);color:var(--text-muted);font-family:ui-monospace,monospace">#f0fdf4</p>
+              </div>
+              <div>
+                <div style="height:56px;border-radius:var(--radius-md);border:1px solid var(--border-default);background:#d97706"></div>
+                <p style="margin-top:6px;font-size:var(--font-size-xs);font-weight:var(--font-weight-medium);color:var(--text-strong)">warning-500</p>
+                <p style="font-size:var(--font-size-2xs);color:var(--text-muted);font-family:ui-monospace,monospace">#d97706</p>
+              </div>
+              <div>
+                <div style="height:56px;border-radius:var(--radius-md);border:1px solid var(--border-default);background:#fffbeb"></div>
+                <p style="margin-top:6px;font-size:var(--font-size-xs);font-weight:var(--font-weight-medium);color:var(--text-strong)">warning-50</p>
+                <p style="font-size:var(--font-size-2xs);color:var(--text-muted);font-family:ui-monospace,monospace">#fffbeb</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== Typography ========== -->
+        <section class="panel">
+          <div class="panel__header"><h2 class="panel__title">Typography</h2></div>
+          <div class="panel__body" style="display:flex;flex-direction:column;gap:var(--spacing-lg)">
+            <div style="display:flex;align-items:baseline;gap:var(--spacing-xl)"><span class="u-text-muted u-text-sm" style="width:200px">Heading/H1 · 24 Bold</span><span style="font-size:24px;font-weight:700;color:var(--text-strong)">게시판 관리</span></div>
+            <div style="display:flex;align-items:baseline;gap:var(--spacing-xl)"><span class="u-text-muted u-text-sm" style="width:200px">Heading/H2 · 20 Bold</span><span style="font-size:20px;font-weight:700;color:var(--text-strong)">게시글 상세</span></div>
+            <div style="display:flex;align-items:baseline;gap:var(--spacing-xl)"><span class="u-text-muted u-text-sm" style="width:200px">Title/18 Medium</span><span style="font-size:18px;font-weight:500;color:var(--text-strong)">2026년 하반기 시스템 정기 점검 안내</span></div>
+            <div style="display:flex;align-items:baseline;gap:var(--spacing-xl)"><span class="u-text-muted u-text-sm" style="width:200px">Body/16 Regular</span><span style="font-size:16px;font-weight:400;color:var(--text-strong)">본문 텍스트 스타일입니다.</span></div>
+            <div style="display:flex;align-items:baseline;gap:var(--spacing-xl)"><span class="u-text-muted u-text-sm" style="width:200px">Body/14 Regular</span><span style="font-size:14px;font-weight:400;color:var(--text-strong)">기본 본문 및 컨트롤 텍스트</span></div>
+            <div style="display:flex;align-items:baseline;gap:var(--spacing-xl)"><span class="u-text-muted u-text-sm" style="width:200px">Body/14 Medium</span><span style="font-size:14px;font-weight:500;color:var(--text-strong)">버튼 라벨, 강조 본문</span></div>
+            <div style="display:flex;align-items:baseline;gap:var(--spacing-xl)"><span class="u-text-muted u-text-sm" style="width:200px">Body/13 Regular</span><span style="font-size:13px;font-weight:400;color:var(--text-strong)">테이블 셀, 인풋 텍스트</span></div>
+            <div style="display:flex;align-items:baseline;gap:var(--spacing-xl)"><span class="u-text-muted u-text-sm" style="width:200px">Body/13 Medium</span><span style="font-size:13px;font-weight:500;color:var(--text-strong)">테이블 제목 셀</span></div>
+            <div style="display:flex;align-items:baseline;gap:var(--spacing-xl)"><span class="u-text-muted u-text-sm" style="width:200px">Caption/12 Regular</span><span style="font-size:12px;font-weight:400;color:var(--text-strong)">보조 설명, 헬프 텍스트</span></div>
+            <div style="display:flex;align-items:baseline;gap:var(--spacing-xl)"><span class="u-text-muted u-text-sm" style="width:200px">Caption/12 Medium</span><span style="font-size:12px;font-weight:500;color:var(--text-strong)">필드 라벨</span></div>
+            <div style="display:flex;align-items:baseline;gap:var(--spacing-xl)"><span class="u-text-muted u-text-sm" style="width:200px">Caption/11 Bold</span><span style="font-size:11px;font-weight:700;color:var(--text-strong)">뱃지 · 사이드바 그룹</span></div>
+          </div>
+        </section>
+
+        <!-- ========== Button ========== -->
+        <section class="panel">
+          <div class="panel__header"><h2 class="panel__title">Button</h2></div>
+          <div class="panel__body" style="display:flex;flex-direction:column;gap:var(--spacing-lg)">
+            <div class="btn-group">
+              <button class="btn btn--primary">Primary</button>
+              <button class="btn btn--secondary">Secondary</button>
+              <button class="btn btn--danger">Danger</button>
+              <button class="btn btn--danger-outline">Danger Outline</button>
+              <button class="btn btn--ghost">Ghost</button>
+              <button class="btn btn--primary" disabled>Disabled</button>
+            </div>
+            <div class="btn-group">
+              <button class="btn btn--sm btn--primary">Small</button>
+              <button class="btn btn--primary">Medium</button>
+              <button class="btn btn--lg btn--primary">Large</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== Form ========== -->
+        <section class="panel">
+          <div class="panel__header"><h2 class="panel__title">Form Control</h2></div>
+          <div class="panel__body">
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--spacing-xl)">
+              <div class="field">
+                <label class="field__label">Text Input</label>
+                <input class="input" type="text" placeholder="placeholder">
+              </div>
+              <div class="field">
+                <label class="field__label">Select</label>
+                <select class="select"><option>20개씩</option><option>50개씩</option></select>
+              </div>
+              <div class="field">
+                <label class="field__label">Date</label>
+                <input class="input" type="date" value="2026-08-31">
+              </div>
+              <div class="field">
+                <label class="field__label">Disabled</label>
+                <input class="input" type="text" value="수정 불가" disabled>
+              </div>
+              <div class="field">
+                <label class="field__label">Readonly</label>
+                <input class="input" type="text" value="2026-08-28 14:22" readonly>
+              </div>
+              <div class="field">
+                <label class="field__label">Error</label>
+                <input class="input" type="text" value="" style="border-color:var(--color-danger-500)">
+                <span class="field__error">필수 입력 항목입니다.</span>
+              </div>
+            </div>
+            <div style="display:flex;gap:var(--spacing-2xl);align-items:center;margin-top:var(--spacing-xl)">
+              <label class="u-flex u-items-center u-gap-2 u-text-sm"><input type="checkbox" class="checkbox"> Unchecked</label>
+              <label class="u-flex u-items-center u-gap-2 u-text-sm"><input type="checkbox" class="checkbox" checked> Checked</label>
+              <label class="u-flex u-items-center u-gap-2 u-text-sm"><input type="checkbox" class="checkbox" id="sg-ind"> Indeterminate</label>
+              <span class="table-toolbar__divider"></span>
+              <label class="radio-label"><input type="radio" class="radio" name="sg-radio"> Radio</label>
+              <label class="radio-label"><input type="radio" class="radio" name="sg-radio" checked> Radio checked</label>
+              <span class="badge badge--notice">공지</span>
+              <span class="badge badge--new">NEW</span>
+              <span class="badge badge--default">일반</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== Spacing / Radius ========== -->
+        <section class="panel">
+          <div class="panel__header"><h2 class="panel__title">Spacing &amp; Radius</h2></div>
+          <div class="panel__body" style="display:flex;gap:var(--spacing-4xl);flex-wrap:wrap">
+            <div>
+              <p style="margin-bottom:var(--spacing-md);font-size:var(--font-size-xs);font-weight:600;color:var(--text-muted)">SPACING (4px base)</p>
+              <div style="display:flex;align-items:flex-end;gap:var(--spacing-md)">
+                <div style="text-align:center"><div style="width:4px;height:4px;background:var(--color-primary-300);border-radius:2px"></div><p style="margin-top:6px;font-size:11px;color:var(--text-muted)">xs</p></div>
+                <div style="text-align:center"><div style="width:8px;height:8px;background:var(--color-primary-300);border-radius:2px"></div><p style="margin-top:6px;font-size:11px;color:var(--text-muted)">sm</p></div>
+                <div style="text-align:center"><div style="width:12px;height:12px;background:var(--color-primary-300);border-radius:2px"></div><p style="margin-top:6px;font-size:11px;color:var(--text-muted)">md</p></div>
+                <div style="text-align:center"><div style="width:16px;height:16px;background:var(--color-primary-300);border-radius:2px"></div><p style="margin-top:6px;font-size:11px;color:var(--text-muted)">lg</p></div>
+                <div style="text-align:center"><div style="width:20px;height:20px;background:var(--color-primary-300);border-radius:2px"></div><p style="margin-top:6px;font-size:11px;color:var(--text-muted)">xl</p></div>
+                <div style="text-align:center"><div style="width:24px;height:24px;background:var(--color-primary-300);border-radius:2px"></div><p style="margin-top:6px;font-size:11px;color:var(--text-muted)">2xl</p></div>
+                <div style="text-align:center"><div style="width:32px;height:32px;background:var(--color-primary-300);border-radius:2px"></div><p style="margin-top:6px;font-size:11px;color:var(--text-muted)">3xl</p></div>
+                <div style="text-align:center"><div style="width:40px;height:40px;background:var(--color-primary-300);border-radius:2px"></div><p style="margin-top:6px;font-size:11px;color:var(--text-muted)">4xl</p></div>
+                <div style="text-align:center"><div style="width:48px;height:48px;background:var(--color-primary-300);border-radius:2px"></div><p style="margin-top:6px;font-size:11px;color:var(--text-muted)">5xl</p></div>
+              </div>
+            </div>
+            <div>
+              <p style="margin-bottom:var(--spacing-md);font-size:var(--font-size-xs);font-weight:600;color:var(--text-muted)">RADIUS</p>
+              <div style="display:flex;align-items:flex-end;gap:var(--spacing-md)">
+                <div style="text-align:center"><div style="width:48px;height:48px;background:var(--color-gray-100);border:1px solid var(--border-strong);border-radius:4px"></div><p style="margin-top:6px;font-size:11px;color:var(--text-muted)">sm</p></div>
+                <div style="text-align:center"><div style="width:48px;height:48px;background:var(--color-gray-100);border:1px solid var(--border-strong);border-radius:6px"></div><p style="margin-top:6px;font-size:11px;color:var(--text-muted)">md</p></div>
+                <div style="text-align:center"><div style="width:48px;height:48px;background:var(--color-gray-100);border:1px solid var(--border-strong);border-radius:8px"></div><p style="margin-top:6px;font-size:11px;color:var(--text-muted)">lg</p></div>
+                <div style="text-align:center"><div style="width:48px;height:48px;background:var(--color-gray-100);border:1px solid var(--border-strong);border-radius:12px"></div><p style="margin-top:6px;font-size:11px;color:var(--text-muted)">xl</p></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+</div>
+<script>document.getElementById('sg-ind').indeterminate = true;</script>
+</body>
+</html>

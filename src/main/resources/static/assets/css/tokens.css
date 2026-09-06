@@ -1,0 +1,135 @@
+/* ==========================================================================
+   Design Tokens — Board Admin UI
+   Figma 변수 컬렉션과 1:1 대응 (color / typography / spacing / radius / shadow)
+   ========================================================================== */
+
+:root {
+  /* ---------- Color / Neutral ---------- */
+  --color-white:      #ffffff;
+  --color-gray-50:    #f8f9fb;
+  --color-gray-100:   #f1f3f6;
+  --color-gray-200:   #e5e8ee;
+  --color-gray-300:   #d4d9e2;
+  --color-gray-400:   #aeb5c3;
+  --color-gray-500:   #7b8496;
+  --color-gray-600:   #5a6274;
+  --color-gray-700:   #3d4453;
+  --color-gray-800:   #262b36;
+  --color-gray-900:   #161a22;
+
+  /* ---------- Color / Brand ---------- */
+  --color-primary-50:  #eff5ff;
+  --color-primary-100: #dbe7fe;
+  --color-primary-300: #93b4fd;
+  --color-primary-500: #2563eb;
+  --color-primary-600: #1d4ed8;
+  --color-primary-700: #1e40af;
+
+  /* ---------- Color / Status ---------- */
+  --color-danger-50:   #fef2f2;
+  --color-danger-100:  #fee2e2;
+  --color-danger-500:  #dc2626;
+  --color-danger-600:  #b91c1c;
+
+  --color-success-50:  #f0fdf4;
+  --color-success-100: #dcfce7;
+  --color-success-500: #16a34a;
+  --color-success-600: #15803d;
+
+  --color-warning-50:  #fffbeb;
+  --color-warning-100: #fef3c7;
+  --color-warning-500: #d97706;
+
+  /* ---------- Semantic ---------- */
+  --bg-body:          var(--color-gray-100);
+  --bg-surface:       var(--color-white);
+  --bg-subtle:        var(--color-gray-50);
+  --bg-header:        var(--color-gray-900);
+  --bg-sidebar:       var(--color-gray-800);
+  --bg-row-hover:     var(--color-primary-50);
+  /* Figma 는 gray/900 + 레이어 투명도 48% 로 표현한다 (CSS 는 최종값 보관) */
+  --bg-overlay-scrim: rgba(22, 26, 34, .48);
+
+  --text-strong:      var(--color-gray-900);
+  --text-default:     var(--color-gray-700);
+  --text-muted:       var(--color-gray-500);
+  --text-disabled:    var(--color-gray-400);
+  --text-inverse:     var(--color-white);
+  --text-link:        var(--color-primary-600);
+  --text-danger:      var(--color-danger-500);
+
+  --border-default:   var(--color-gray-200);
+  --border-strong:    var(--color-gray-300);
+  --border-focus:     var(--color-primary-500);
+  --border-danger:    var(--color-danger-500);
+
+  --action-primary:       var(--color-primary-500);
+  --action-primary-hover: var(--color-primary-600);
+  --action-danger:        var(--color-danger-500);
+  --action-danger-hover:  var(--color-danger-600);
+
+  --status-success-bg: var(--color-success-50);
+  --status-success-fg: var(--color-success-500);
+  --status-danger-bg:  var(--color-danger-50);
+  --status-notice-bg:  var(--color-primary-100);
+  --status-notice-fg:  var(--color-primary-700);
+  --status-new-bg:     var(--color-danger-100);
+  --status-new-fg:     var(--color-danger-600);
+
+  /* ---------- Typography ---------- */
+  --font-family-base: "Pretendard", -apple-system, BlinkMacSystemFont,
+                      "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR",
+                      Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --font-size-2xs:  11px;
+  --font-size-xs:   12px;
+  --font-size-sm:   13px;
+  --font-size-md:   14px;
+  --font-size-lg:   16px;
+  --font-size-xl:   18px;
+  --font-size-2xl:  20px;
+  --font-size-3xl:  24px;
+
+  --font-weight-regular: 400;
+  --font-weight-medium:  500;
+  --font-weight-bold:    700;
+
+  --line-height-tight:  1.3;
+  --line-height-normal: 1.5;
+  --line-height-relaxed:1.7;
+
+  /* ---------- Spacing (4px base) — Figma: Layout / spacing ---------- */
+  --spacing-xs:  4px;
+  --spacing-sm:  8px;
+  --spacing-md:  12px;
+  --spacing-lg:  16px;
+  --spacing-xl:  20px;
+  --spacing-2xl: 24px;
+  --spacing-3xl: 32px;
+  --spacing-4xl: 40px;
+  --spacing-5xl: 48px;
+
+  /* ---------- Radius ---------- */
+  --radius-sm:   4px;
+  --radius-md:   6px;
+  --radius-lg:   8px;
+  --radius-xl:   12px;
+  --radius-full: 999px;
+
+  /* ---------- Shadow ---------- */
+  --shadow-sm: 0 1px 2px rgba(22, 26, 34, .06);
+  --shadow-md: 0 2px 8px rgba(22, 26, 34, .08);
+  --shadow-lg: 0 12px 32px rgba(22, 26, 34, .18);
+
+  /* ---------- Layout — Figma: Layout / size ---------- */
+  --size-header:      56px;
+  --size-sidebar:     208px;
+  --size-control-sm:  30px;
+  --size-control-md:  34px;
+  --size-control-lg:  40px;
+  --size-border:      1px;
+
+  /* ---------- Motion ---------- */
+  --duration-fast: 120ms;
+  --easing-standard: cubic-bezier(.2, 0, .2, 1);
+}
