@@ -20,7 +20,7 @@
 
 이 프로젝트의 영속성 계층은 리포지토리 인터페이스 1개에 구현체 1개를 두고, 구현체 내부에서 **쓰기·단건조회는 Spring Data JPA, 목록·검색·통계는 MyBatis Mapper**로 나눠 호출하는 병행 구조다. 여기서 반복적으로 사고가 나므로 다음을 매번 검사한다.
 
-- 같은 트랜잭션에서 한 테이블을 JPA와 MyBatis로 함께 건드리는 코드. JPA 변경 감지는 `flush()` 전까지 MyBatis 조회에 보이지 않는다. 쓰기 후 MyBatis로 조회하는 흐름이 있으면 flush 시점을 짚어 지적한다. (IDENTITY 전략의 INSERT는 즉시 실행되므로 예외)
+- JPA 쓰기 결과에 의존해 MyBatis로 조회하면서 그 사이 flush가 보장되지 않는 코드. JPA 변경 감지는 `flush()` 전까지 MyBatis 조회에 보이지 않는다. 다만 `saveAndFlush()`나 명시적 `flush()` 호출, IDENTITY 전략의 INSERT처럼 반영이 이미 보장된 경로는 지적하지 않는다. 같은 트랜잭션이라는 사실만으로는 근거가 되지 않는다.
 - Y/N 플래그 컬럼은 반드시 `CHAR(1)`이어야 한다. `VARCHAR(1)`이면 Hibernate `YesNoConverter`와 `ddl-auto: validate`가 충돌해 부팅이 실패한다. MyBatis 조회 SQL에서는 `(col = 'Y') AS ...` 변환이 있는지 확인한다.
 - 스키마 소유자는 Flyway다. 엔티티 필드가 추가·변경됐는데 `src/main/resources/data/flyway/` 마이그레이션이 함께 오지 않으면 Important로 보고한다. 기존 마이그레이션 파일을 수정하는 변경도 Important다.
 - `data/` 하위 패키지를 옮기는 변경은 `application.yaml`의 `mybatis.type-aliases-package`와 `@MapperScan` 경로를 함께 고쳐야 한다.
