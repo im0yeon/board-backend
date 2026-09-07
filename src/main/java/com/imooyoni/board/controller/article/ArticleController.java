@@ -12,6 +12,7 @@ import com.imooyoni.board.data.domain.article.ArticleElements;
 import com.imooyoni.board.service.article.ArticleService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 
@@ -43,6 +44,35 @@ public class ArticleController {
 	public BaseResponse<Article> get(@PathVariable Long id) {
 		return BaseResponse.success(
 				articleService.get(id)
+		);
+	}
+
+	@PostMapping
+	public BaseResponse<Article> write(
+			@RequestParam String title,
+			@RequestParam String content,
+			@RequestParam(defaultValue = "false") Boolean isNotice,
+			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate createDate,
+			@RequestParam String writer,
+			@RequestParam(value = "file", required = false) MultipartFile file
+	) {
+		return BaseResponse.success(
+				articleService.write(title, content, writer, isNotice, createDate, file)
+		);
+	}
+
+	@PutMapping("/{id}")
+	public BaseResponse<Article> modify(
+			@PathVariable Long id,
+			@RequestParam String title,
+			@RequestParam String content,
+			@RequestParam(defaultValue = "false") Boolean isNotice,
+			@RequestParam String writer,
+			@RequestParam(defaultValue = "false") Boolean isRemoveFile,
+			@RequestParam(value = "file", required = false) MultipartFile file
+	) {
+		return BaseResponse.success(
+				articleService.modify(id, title, content, writer, isNotice, isRemoveFile, file)
 		);
 	}
 }

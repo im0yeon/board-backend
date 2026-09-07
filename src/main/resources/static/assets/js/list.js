@@ -31,7 +31,7 @@
 
   /* ---------- 등록 ---------- */
   document.getElementById('btn-create').addEventListener('click', function () {
-    location.href = 'form.html?mode=create';
+    location.href = 'articles/write';
   });
 
   /* ---------- 삭제: 확인 → 완료 / 실패 ---------- */

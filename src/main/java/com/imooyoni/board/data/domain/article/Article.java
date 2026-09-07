@@ -41,30 +41,47 @@ public class Article {
 	@Convert(converter = YesNoConverter.class)
 	private boolean isNotice;
 
+	@Column(name = "file_url", nullable = true, length = 200)
+	private String fileUrl;
+
 	@Column(name = "created_at", nullable = false)
 	private LocalDateTime createdAt;
 
 	@Column(name = "updated_at", nullable = false)
 	private LocalDateTime updatedAt;
 
-	private Article(String title, String content, String writer) {
+	private Article(String title, String content, String writer, boolean isNotice, LocalDateTime createdAt) {
 		this.title = title;
 		this.content = content;
 		this.writer = writer;
+		this.isNotice = isNotice;
+		this.createdAt = createdAt;
 	}
 
-	public static Article write(String title, String content, String writer) {
-		return new Article(title, content, writer);
+	public static Article write(String title, String content, String writer, boolean isNotice, LocalDateTime createdAt) {
+		return new Article(title, content, writer, isNotice, createdAt);
 	}
 
-	public void modify(String title, String content) {
+	public void modify(String title, String content, String writer, boolean isNotice) {
 		this.title = title;
 		this.content = content;
+		this.writer = writer;
+		this.isNotice = isNotice;
+	}
+
+	public void attachFile(String fileUrl) {
+		this.fileUrl = fileUrl;
+	}
+
+	public void detachFile() {
+		this.fileUrl = null;
 	}
 
 	@PrePersist
 	void onCreate() {
-		this.createdAt = LocalDateTime.now();
+		if (this.createdAt == null) {
+			this.createdAt = LocalDateTime.now();
+		}
 		this.updatedAt = this.createdAt;
 	}
 

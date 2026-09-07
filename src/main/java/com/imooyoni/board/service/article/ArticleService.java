@@ -5,6 +5,10 @@ import com.imooyoni.board.common.utils.paging.PageResponse;
 import com.imooyoni.board.data.domain.article.Article;
 import com.imooyoni.board.data.domain.article.ArticleSearchCommand;
 import com.imooyoni.board.data.domain.article.ArticleElements;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.time.LocalDate;
 
 public interface ArticleService {
 
@@ -12,5 +16,19 @@ public interface ArticleService {
 
 	Article get(Long id);
 
-	Article write(String title, String content, String writer);
+	Article write(String title
+			, String content
+			, String writer
+			, Boolean isNotice
+			, LocalDate createDate
+			, MultipartFile file);
+
+	Article modify(
+			Long id
+			, String title
+			, String content
+			, String writer
+			, Boolean isNotice
+			, Boolean isRemoveFile
+			, MultipartFile file);
 }

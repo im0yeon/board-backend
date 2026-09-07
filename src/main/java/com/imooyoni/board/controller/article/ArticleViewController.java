@@ -54,6 +54,16 @@ public class ArticleViewController {
 	public String write(
 			Model model
 	) {
-		return "article/write";
+		return "article/form";
+	}
+
+	@GetMapping("/articles/write/{id}")
+	public String update(
+			@PathVariable Long id,
+			Model model
+	) {
+		model.addAttribute("article", articleService.get(id));
+		model.addAttribute("mode", "edit");
+		return "article/form";
 	}
 }
