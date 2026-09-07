@@ -1,5 +1,8 @@
 package com.imooyoni.board.controller.article;
 
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,14 +25,18 @@ public class ArticleViewController {
 	public String list(
 			@RequestParam(required = false) String keyword,
 			@RequestParam(required = false) String writer,
+			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
 			@RequestParam(required = false) Integer page,
 			@RequestParam(required = false) Integer size,
 			Model model) {
 
-		model.addAttribute("articles",
-				articleService.search(ArticleSearchCommand.of(keyword, writer), PageCommand.of(page, size)));
+		model.addAttribute("articles", articleService.search(
+				ArticleSearchCommand.of(keyword, writer, startDate, endDate), PageCommand.of(page, size)));
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("writer", writer);
+		model.addAttribute("startDate", startDate);
+		model.addAttribute("endDate", endDate);
 
 		return "article/list";
 	}

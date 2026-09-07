@@ -16,4 +16,5 @@ public interface ArticleRepository {
 	List<ArticleElements> search(ArticleSearchCommand command, PageCommand page);
 
 	long countBy(ArticleSearchCommand command);
+
 }

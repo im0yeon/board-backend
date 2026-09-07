@@ -30,8 +30,9 @@ public class ArticleServiceImpl implements ArticleService {
 			return PageResponse.empty(page);
 		}
 
-		List<ArticleElements> content = articleRepository.search(command, page);
-		return PageResponse.of(content, page, total);
+		PageCommand paged = page.clampTo(total);
+		List<ArticleElements> content = articleRepository.search(command, paged);
+		return PageResponse.of(content, paged, total);
 	}
 
 	@Override

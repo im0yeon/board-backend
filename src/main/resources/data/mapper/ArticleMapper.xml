@@ -16,17 +16,27 @@
     <sql id="searchCondition">
         <where>
             <if test="cond.keyword != null">
-                AND (a.title LIKE CONCAT('%', #{cond.keyword}, '%')
-                OR a.content LIKE CONCAT('%', #{cond.keyword}, '%'))
+                AND a.title LIKE CONCAT('%', #{cond.keyword}, '%')
             </if>
             <if test="cond.writer != null">
-                AND a.writer = #{cond.writer}
+                AND a.writer LIKE CONCAT('%', #{cond.writer}, '%')
+            </if>
+            <if test="cond.startDateTime != null">
+                AND a.created_at &gt;= #{cond.startDateTime}
+            </if>
+            <if test="cond.endDateTime != null">
+                AND a.created_at &lt; #{cond.endDateTime}
             </if>
         </where>
     </sql>
 
     <select id="search" resultMap="articleElements">
-        SELECT a.id, a.title, a.writer, (a.notice_yn = 'Y') AS is_notice, a.created_at
+        SELECT
+            a.id,
+            a.title,
+            a.writer,
+            (a.notice_yn = 'Y') AS is_notice,
+            a.created_at
         FROM article a
         <include refid="searchCondition"/>
         ORDER BY a.id DESC

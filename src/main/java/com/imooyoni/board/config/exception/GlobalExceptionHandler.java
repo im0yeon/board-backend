@@ -7,6 +7,7 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import com.imooyoni.board.common.BaseException;
@@ -52,6 +53,15 @@ public class GlobalExceptionHandler {
 
 		return ResponseEntity.status(ErrorCode.NOT_FOUND.getStatus())
 				.body(BaseResponse.error(ErrorCode.NOT_FOUND, "요청 경로"));
+	}
+
+	// 날짜·숫자 등 파라미터 타입 변환 실패
+	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
+	public ResponseEntity<BaseResponse<Object>> handleTypeMismatch(MethodArgumentTypeMismatchException e) {
+		log.warn("파라미터 형식 오류: name={}, value={}", e.getName(), e.getValue());
+
+		return ResponseEntity.status(ErrorCode.INVALID_PARAMETER.getStatus())
+				.body(BaseResponse.error(ErrorCode.INVALID_PARAMETER, e.getName(), e.getValue()));
 	}
 
 	// 내부 오류 상세는 응답에 노출하지 않음

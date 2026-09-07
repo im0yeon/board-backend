@@ -37,7 +37,6 @@ public class ArticleRepositoryImpl implements ArticleRepository {
 		jpaRepository.deleteById(id);
 	}
 
-	// 조회 조건이 늘어나는 목록은 MyBatis 동적 SQL로 처리
 	@Override
 	public List<ArticleElements> search(ArticleSearchCommand command, PageCommand page) {
 		return articleMapper.search(command, page.offset(), page.limit());
@@ -47,4 +46,5 @@ public class ArticleRepositoryImpl implements ArticleRepository {
 	public long countBy(ArticleSearchCommand command) {
 		return articleMapper.countBy(command);
 	}
+
 }

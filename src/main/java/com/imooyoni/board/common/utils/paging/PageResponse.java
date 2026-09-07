@@ -15,9 +15,7 @@ public record PageResponse<T>(
     private static final int PAGE_BLOCK_SIZE = 10;
 
     public static <T> PageResponse<T> of(List<T> content, PageCommand command, long totalElements) {
-        int totalPages = command.size() == 0
-                ? 0
-                : (int) Math.ceil((double) totalElements / command.size());
+        int totalPages = command.totalPages(totalElements);
 
         return new PageResponse<>(
                 content,

@@ -17,7 +17,7 @@
         <h1 class="page-head__title">게시판 관리</h1>
       </div>
 
-      <form method="get" th:action="@{/articles}">
+      <form class="page-form" method="get" th:action="@{/articles}">
       <!-- ---------- 검색 섹션 ---------- -->
       <section class="panel search-panel">
         <div class="panel__body">
@@ -33,9 +33,9 @@
             <div class="field">
               <label class="field__label" for="q-date-from">등록일</label>
               <div class="date-range">
-                <input class="input" id="q-date-from" type="date" value="2026-08-01">
+                <input class="input" id="q-date-from" name="startDate" type="date" th:value="${startDate}">
                 <span class="date-range__sep">~</span>
-                <input class="input" id="q-date-to" type="date" value="2026-08-31">
+                <input class="input" id="q-date-to" name="endDate" type="date" th:value="${endDate}">
               </div>
             </div>
           </div>
