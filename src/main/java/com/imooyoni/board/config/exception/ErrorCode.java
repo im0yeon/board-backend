@@ -14,6 +14,8 @@ public enum ErrorCode {
 	METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED, "C405","지원하지 않는 요청 방식입니다"),
 	INVALID_DATE_RANGE(HttpStatus.BAD_REQUEST, "C4001","검색 기간이 올바르지 않습니다. 시작일(%s)이 종료일(%s)보다 늦습니다"),
 	INVALID_PARAMETER(HttpStatus.BAD_REQUEST, "C4002","%s 값의 형식이 올바르지 않습니다: %s"),
+	FILE_TOO_LARGE(HttpStatus.CONTENT_TOO_LARGE, "C413","파일 크기가 제한(%s)을 초과했습니다"),
+	UNSUPPORTED_FILE_TYPE(HttpStatus.UNSUPPORTED_MEDIA_TYPE, "C415","허용하지 않는 확장자입니다. 가능한 확장자: %s"),
 	INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "C500","서버 오류가 발생했습니다");
 
 	private final HttpStatus status;

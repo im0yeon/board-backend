@@ -1,0 +1,1 @@
+ALTER TABLE article ADD COLUMN file_url VARCHAR(200) NULL COMMENT '파일 경로';

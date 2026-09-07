@@ -8,10 +8,12 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import com.imooyoni.board.common.BaseException;
 import com.imooyoni.board.common.BaseResponse;
+import com.imooyoni.board.common.utils.io.FileUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -62,6 +64,16 @@ public class GlobalExceptionHandler {
 
 		return ResponseEntity.status(ErrorCode.INVALID_PARAMETER.getStatus())
 				.body(BaseResponse.error(ErrorCode.INVALID_PARAMETER, e.getName(), e.getValue()));
+	}
+
+	// 서블릿 한도 초과 - 컨트롤러 진입 전에 발생해 FileUtils 검사가 닿지 않는다
+	@ExceptionHandler(MaxUploadSizeExceededException.class)
+	public ResponseEntity<BaseResponse<Object>> handleUploadSize(MaxUploadSizeExceededException e) {
+		log.warn("업로드 크기 초과: 서블릿 한도={}bytes", e.getMaxUploadSize());
+
+		String limit = FileUtils.formatSize(FileUtils.MAX_ATTACHMENT_SIZE);
+		return ResponseEntity.status(ErrorCode.FILE_TOO_LARGE.getStatus())
+				.body(BaseResponse.error(ErrorCode.FILE_TOO_LARGE, limit));
 	}
 
 	// 내부 오류 상세는 응답에 노출하지 않음
