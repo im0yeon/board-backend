@@ -86,17 +86,45 @@ document.getElementById('btn-edit').addEventListener('click', function () {
     syncCount();
 })();
 
-document.getElementById('btn-delete').addEventListener('click', function () {
-    Alert.preset('delete.confirm', {
-        onConfirm: function () {
-            var ok = true; // 실제 구현에서는 API 응답으로 분기
-            if (ok) {
-                Alert.preset('delete.success', {
-                    onConfirm: function () { location.href = '/articles'; }
-                });
-            } else {
-                Alert.preset('delete.fail');
+/* ---------- 삭제 ---------- */
+(function () {
+    var btn = document.getElementById('btn-delete');
+
+    btn.addEventListener('click', function () {
+        var articleId = btn.dataset.articleId;
+
+        Alert.preset('delete.confirm', {
+            onConfirm: function () {
+                btn.disabled = true;
+
+                fetch('/api/articles/' + articleId, { method: 'DELETE' })
+                    .then(function (res) {
+                        return res.json().then(
+                            function (json) {
+                                if (res.ok && json.status === 200) return json;
+                                throw failure(json.error, res.status);
+                            },
+                            function () { throw failure(null, res.status); }
+                        );
+                    })
+                    .then(function () {
+                        Alert.preset('delete.success', {
+                            onConfirm: function () { location.href = '/articles'; }
+                        });
+                    })
+                    .catch(function (err) {
+                        console.error('게시글 삭제 실패: id=%s, 원인=%s', articleId, err.message);
+                        Alert.preset('delete.fail', err.reason ? { message: err.reason } : null);
+                    })
+                    .finally(function () { btn.disabled = false; });
             }
-        }
+        });
     });
-});
+
+    // 서버가 사유를 주면 얼럿에 그대로 노출한다
+    function failure(reason, status) {
+        var err = new Error(reason || ('HTTP ' + status));
+        if (reason) err.reason = reason;
+        return err;
+    }
+})();

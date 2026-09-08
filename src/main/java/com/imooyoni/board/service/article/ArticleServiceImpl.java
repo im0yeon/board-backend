@@ -113,9 +113,31 @@ public class ArticleServiceImpl implements ArticleService {
 		return ArticleDetailElements.from(articleRepository.save(article));
 	}
 
+	@Override
+	@Transactional
+	public void delete(List<Long> ids) {
+		if (ids == null || ids.isEmpty()) {
+			throw BaseException.of(ErrorCode.INVALID_INPUT, "삭제할 게시글이 지정되지 않았습니다");
+		}
+
+		List<Article> articles = articleRepository.findAllById(ids);
+		if (articles.size() != ids.size()) {
+			throw BaseException.of(ErrorCode.NOT_FOUND, null, "게시글");
+		}
+
+		for (Article article : articles) {
+			fileStorage.delete(article.getFileUrl());
+			articleRepository.deleteById(article.getId());
+		}
+	}
+
 	// 쓰기 경로는 영속 상태 엔티티가 필요하다
 	private Article getEntity(Long id) {
 		return articleRepository.findById(id)
 				.orElseThrow(() -> BaseException.of(ErrorCode.NOT_FOUND, null, "게시글"));
+	}
+
+	private List<Article> getEntities(List<Long> ids) {
+		return articleRepository.findAllById(ids);
 	}
 }

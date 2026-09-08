@@ -97,7 +97,8 @@
         <div class="content-card__footer">
           <button type="button" class="btn btn--secondary" th:onclick="|location.href='/articles'|">목록</button>
           <div class="spacer"></div>
-          <button type="button" class="btn btn--danger-outline" id="btn-delete">삭제</button>
+          <button type="button" class="btn btn--danger-outline" id="btn-delete"
+                  th:attr="data-article-id=${article.id}">삭제</button>
           <button type="button" class="btn btn--primary" id="btn-edit"
                   th:attr="data-article-id=${article.id}">수정</button>
         </div>

@@ -20,4 +20,5 @@ public interface ArticleRepository {
 	long countBy(ArticleSearchCommand command);
 
 
+	List<Article> findAllById(List<Long> ids);
 }

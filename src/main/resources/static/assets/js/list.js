@@ -47,25 +47,41 @@
       return;
     }
 
+    var ids = checked.map(function (c) { return c.value; });
+
     Alert.preset('delete.confirm', {
       message: '선택한 ' + checked.length + '건을 삭제합니다.\n삭제한 게시글은 복구할 수 없습니다.',
       onConfirm: function () {
-        // 실제 구현에서는 API 응답에 따라 분기한다.
-        var ok = true;
-        if (ok) {
-          Alert.preset('delete.success', {
-            message: '선택한 ' + checked.length + '건이 삭제되었습니다.',
-            onConfirm: function () {
-              checked.forEach(function (c) { c.closest('tr').remove(); });
-              syncState();
-            }
+        fetch('/api/articles?ids=' + ids.join(','), { method: 'DELETE' })
+          .then(function (res) {
+            return res.json().then(
+              function (json) {
+                if (res.ok && json.status === 200) return json;
+                throw failure(json.error, res.status);
+              },
+              function () { throw failure(null, res.status); }
+            );
+          })
+          .then(function () {
+            Alert.preset('delete.success', {
+              message: '선택한 ' + checked.length + '건이 삭제되었습니다.',
+              onConfirm: function () { location.reload(); }
+            });
+          })
+          .catch(function (err) {
+            console.error('게시글 삭제 실패: ids=%s, 원인=%s', ids.join(','), err.message);
+            Alert.preset('delete.fail', err.reason ? { message: err.reason } : null);
           });
-        } else {
-          Alert.preset('delete.fail');
-        }
       }
     });
   });
+
+  // 서버가 사유를 주면 얼럿에 그대로 노출한다
+  function failure(reason, status) {
+    var err = new Error(reason || ('HTTP ' + status));
+    if (reason) err.reason = reason;
+    return err;
+  }
 
   /* ---------- 검색 / 초기화 / 노출 개수 ---------- */
   document.getElementById('btn-reset').addEventListener('click', function () {

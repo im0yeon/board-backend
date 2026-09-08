@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/articles")
@@ -75,5 +76,17 @@ public class ArticleController {
 		return BaseResponse.success(
 				articleService.modify(id, title, content, writer, isNotice, isRemoveFile, file)
 		);
+	}
+
+	@DeleteMapping("/{id}")
+	public BaseResponse<Void> delete(@PathVariable Long id) {
+		articleService.delete(List.of(id));
+		return BaseResponse.success();
+	}
+
+	@DeleteMapping
+	public BaseResponse<Void> delete(@RequestParam List<Long> ids) {
+		articleService.delete(ids);
+		return BaseResponse.success();
 	}
 }

@@ -9,6 +9,7 @@ import com.imooyoni.board.common.utils.paging.PageCommand;
 import com.imooyoni.board.common.utils.paging.PageResponse;
 import com.imooyoni.board.data.domain.article.ArticleDetailElements;
 import com.imooyoni.board.data.domain.article.ArticleElements;
+import java.util.List;
 import com.imooyoni.board.data.domain.article.ArticleSearchCommand;
 
 public interface ArticleService {
@@ -33,5 +34,6 @@ public interface ArticleService {
 			, Boolean isRemoveFile
 			, MultipartFile file);
 
+	void delete(List<Long> id);
 
 }

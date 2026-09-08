@@ -39,6 +39,11 @@ public class ArticleRepositoryImpl implements ArticleRepository {
 	}
 
 	@Override
+	public List<Article> findAllById(List<Long> ids) {
+		return jpaRepository.findAllById(ids);
+	}
+
+	@Override
 	public void deleteById(Long id) {
 		jpaRepository.deleteById(id);
 	}

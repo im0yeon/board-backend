@@ -97,7 +97,8 @@
               </tr>
               <tr th:each="article : ${articles.content}">
                 <td class="col-check">
-                  <input type="checkbox" class="checkbox row-check" th:attr="aria-label=|${article.id}번 글 선택|">
+                  <input type="checkbox" class="checkbox row-check" th:value="${article.id}"
+                         th:attr="aria-label=|${article.id}번 글 선택|">
                 </td>
                 <td class="col-no" th:text="${article.id}">128</td>
                 <td>
