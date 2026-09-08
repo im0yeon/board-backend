@@ -1,12 +1,12 @@
 package com.imooyoni.board.controller.article;
 
+import com.imooyoni.board.data.domain.article.ArticleDetailElements;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import com.imooyoni.board.common.BaseResponse;
 import com.imooyoni.board.common.utils.paging.PageCommand;
 import com.imooyoni.board.common.utils.paging.PageResponse;
-import com.imooyoni.board.data.domain.article.Article;
 import com.imooyoni.board.data.domain.article.ArticleSearchCommand;
 import com.imooyoni.board.data.domain.article.ArticleElements;
 import com.imooyoni.board.service.article.ArticleService;
@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/articles")
@@ -41,14 +42,14 @@ public class ArticleController {
 	}
 
 	@GetMapping("/{id}")
-	public BaseResponse<Article> get(@PathVariable Long id) {
+	public BaseResponse<ArticleDetailElements> get(@PathVariable Long id) {
 		return BaseResponse.success(
 				articleService.get(id)
 		);
 	}
 
 	@PostMapping
-	public BaseResponse<Article> write(
+	public BaseResponse<ArticleDetailElements> write(
 			@RequestParam String title,
 			@RequestParam String content,
 			@RequestParam(defaultValue = "false") Boolean isNotice,
@@ -62,7 +63,7 @@ public class ArticleController {
 	}
 
 	@PutMapping("/{id}")
-	public BaseResponse<Article> modify(
+	public BaseResponse<ArticleDetailElements> modify(
 			@PathVariable Long id,
 			@RequestParam String title,
 			@RequestParam String content,

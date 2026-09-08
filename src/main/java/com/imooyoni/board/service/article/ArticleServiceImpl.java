@@ -2,10 +2,10 @@ package com.imooyoni.board.service.article;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.imooyoni.board.common.BaseException;
 import com.imooyoni.board.common.utils.io.FileUtils;
@@ -13,13 +13,13 @@ import com.imooyoni.board.common.utils.paging.PageCommand;
 import com.imooyoni.board.common.utils.paging.PageResponse;
 import com.imooyoni.board.config.exception.ErrorCode;
 import com.imooyoni.board.data.domain.article.Article;
+import com.imooyoni.board.data.domain.article.ArticleDetailElements;
+import com.imooyoni.board.data.domain.article.ArticleElements;
 import com.imooyoni.board.data.domain.article.ArticleRepository;
 import com.imooyoni.board.data.domain.article.ArticleSearchCommand;
-import com.imooyoni.board.data.domain.article.ArticleElements;
 import com.imooyoni.board.service.file.FileStorage;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @RequiredArgsConstructor
@@ -44,14 +44,14 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public Article get(Long id) {
-		return articleRepository.findById(id)
+	public ArticleDetailElements get(Long id) {
+		return articleRepository.findDetailById(id)
 				.orElseThrow(() -> BaseException.of(ErrorCode.NOT_FOUND, null, "게시글"));
 	}
 
 	@Override
 	@Transactional
-	public Article write(
+	public ArticleDetailElements write(
 			String title
 			, String content
 			, String writer
@@ -79,12 +79,12 @@ public class ArticleServiceImpl implements ArticleService {
 			articleRepository.save(article);
 		}
 
-		return article;
+		return ArticleDetailElements.from(article);
 	}
 
 	@Override
 	@Transactional
-	public Article modify(
+	public ArticleDetailElements modify(
 			Long id
 			, String title
 			, String content
@@ -98,7 +98,7 @@ public class ArticleServiceImpl implements ArticleService {
 			FileUtils.verify(file);
 		}
 
-		Article article = get(id);
+		Article article = getEntity(id);
 		article.modify(title, content, writer, Boolean.TRUE.equals(isNotice));
 
 		if (hasFile || Boolean.TRUE.equals(isRemoveFile)) {
@@ -110,6 +110,12 @@ public class ArticleServiceImpl implements ArticleService {
 			article.attachFile(fileStorage.store(file, MENU, article.getId()));
 		}
 
-		return articleRepository.save(article);
+		return ArticleDetailElements.from(articleRepository.save(article));
+	}
+
+	// 쓰기 경로는 영속 상태 엔티티가 필요하다
+	private Article getEntity(Long id) {
+		return articleRepository.findById(id)
+				.orElseThrow(() -> BaseException.of(ErrorCode.NOT_FOUND, null, "게시글"));
 	}
 }

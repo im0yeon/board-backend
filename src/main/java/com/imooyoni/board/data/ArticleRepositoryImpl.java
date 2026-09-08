@@ -3,15 +3,16 @@ package com.imooyoni.board.data;
 import java.util.List;
 import java.util.Optional;
 
-import com.imooyoni.board.data.jpa.ArticleJpaRepository;
-import com.imooyoni.board.data.mapper.ArticleMapper;
 import org.springframework.stereotype.Repository;
 
 import com.imooyoni.board.common.utils.paging.PageCommand;
 import com.imooyoni.board.data.domain.article.Article;
+import com.imooyoni.board.data.domain.article.ArticleDetailElements;
+import com.imooyoni.board.data.domain.article.ArticleElements;
 import com.imooyoni.board.data.domain.article.ArticleRepository;
 import com.imooyoni.board.data.domain.article.ArticleSearchCommand;
-import com.imooyoni.board.data.domain.article.ArticleElements;
+import com.imooyoni.board.data.jpa.ArticleJpaRepository;
+import com.imooyoni.board.data.mapper.ArticleMapper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -33,6 +34,11 @@ public class ArticleRepositoryImpl implements ArticleRepository {
 	}
 
 	@Override
+	public Optional<ArticleDetailElements> findDetailById(Long id) {
+		return articleMapper.findDetailById(id);
+	}
+
+	@Override
 	public void deleteById(Long id) {
 		jpaRepository.deleteById(id);
 	}
@@ -46,5 +52,6 @@ public class ArticleRepositoryImpl implements ArticleRepository {
 	public long countBy(ArticleSearchCommand command) {
 		return articleMapper.countBy(command);
 	}
+
 
 }

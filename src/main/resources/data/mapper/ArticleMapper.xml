@@ -13,6 +13,18 @@
         </constructor>
     </resultMap>
 
+    <resultMap id="articleDetailElements" type="com.imooyoni.board.data.domain.article.ArticleDetailElements">
+        <constructor>
+            <idArg column="id" javaType="_long"/>
+            <arg column="title" javaType="string"/>
+            <arg column="content" javaType="string"/>
+            <arg column="writer" javaType="string"/>
+            <arg column="is_notice" javaType="_boolean"/>
+            <arg column="file_url" javaType="string"/>
+            <arg column="created_at" javaType="java.time.LocalDateTime"/>
+        </constructor>
+    </resultMap>
+
     <sql id="searchCondition">
         <where>
             <if test="cond.keyword != null">
@@ -47,5 +59,18 @@
         SELECT COUNT(*)
         FROM article a
         <include refid="searchCondition"/>
+    </select>
+
+    <select id="findDetailById" resultMap="articleDetailElements">
+        SELECT
+            a.id,
+            a.title,
+            a.content,
+            a.writer,
+            (a.notice_yn = 'Y') AS is_notice,
+            a.file_url,
+            a.created_at
+        FROM article a
+        WHERE a.id = #{id}
     </select>
 </mapper>

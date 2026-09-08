@@ -11,10 +11,13 @@ public interface ArticleRepository {
 
 	Optional<Article> findById(Long id);
 
+	Optional<ArticleDetailElements> findDetailById(Long id);
+
 	void deleteById(Long id);
 
 	List<ArticleElements> search(ArticleSearchCommand command, PageCommand page);
 
 	long countBy(ArticleSearchCommand command);
+
 
 }
