@@ -21,7 +21,6 @@ public record PageCommand(int page, int size) {
         return new PageCommand(DEFAULT_PAGE, DEFAULT_SIZE);
     }
 
-    /** Querydsl / JPQL의 offset 값. int 오버플로를 피하기 위해 long으로 계산한다. */
     public long offset() {
         return (long) (page - DEFAULT_PAGE) * size;
     }

@@ -136,8 +136,4 @@ public class ArticleServiceImpl implements ArticleService {
 		return articleRepository.findById(id)
 				.orElseThrow(() -> BaseException.of(ErrorCode.NOT_FOUND, null, "게시글"));
 	}
-
-	private List<Article> getEntities(List<Long> ids) {
-		return articleRepository.findAllById(ids);
-	}
 }
