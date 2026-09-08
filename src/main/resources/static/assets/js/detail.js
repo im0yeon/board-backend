@@ -1,6 +1,6 @@
 /* 상세 화면 인터랙션 */
 document.getElementById('btn-edit').addEventListener('click', function () {
-    location.href = '/articles/write/' + this.dataset.articleId;
+    location.href = '/articles/' + this.dataset.articleId + '/edit';
 });
 
 /* ---------- 댓글 ---------- */
@@ -92,7 +92,7 @@ document.getElementById('btn-delete').addEventListener('click', function () {
             var ok = true; // 실제 구현에서는 API 응답으로 분기
             if (ok) {
                 Alert.preset('delete.success', {
-                    onConfirm: function () { location.href = 'list.html'; }
+                    onConfirm: function () { location.href = '/articles'; }
                 });
             } else {
                 Alert.preset('delete.fail');

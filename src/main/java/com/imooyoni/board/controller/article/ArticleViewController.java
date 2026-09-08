@@ -41,7 +41,7 @@ public class ArticleViewController {
 		return "article/list";
 	}
 
-	@GetMapping("/articles/detail/{id}")
+	@GetMapping("/articles/{id}")
 	public String detail(
 			@PathVariable Long id,
 			Model model
@@ -50,14 +50,14 @@ public class ArticleViewController {
 		return "article/detail";
 	}
 
-	@GetMapping("/articles/write")
+	@GetMapping("/articles/new")
 	public String write(
 			Model model
 	) {
 		return "article/form";
 	}
 
-	@GetMapping("/articles/write/{id}")
+	@GetMapping("/articles/{id}/edit")
 	public String update(
 			@PathVariable Long id,
 			Model model

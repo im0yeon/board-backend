@@ -31,7 +31,7 @@
 
   /* ---------- 등록 ---------- */
   document.getElementById('btn-create').addEventListener('click', function () {
-    location.href = 'articles/write';
+    location.href = '/articles/new';
   });
 
   /* ---------- 삭제: 확인 → 완료 / 실패 ---------- */
@@ -63,19 +63,6 @@
         } else {
           Alert.preset('delete.fail');
         }
-      }
-    });
-  });
-
-  /* ---------- 엑셀 다운로드 ---------- */
-  document.getElementById('btn-excel').addEventListener('click', function () {
-    Alert.open({
-      type: 'confirm',
-      title: '엑셀로 다운로드할까요?',
-      message: '현재 검색 조건의 전체 목록을 내려받습니다.',
-      confirmText: '다운로드',
-      onConfirm: function () {
-        Alert.open({ type: 'success', title: '다운로드를 시작합니다.', message: 'board_list_20260831.xlsx' });
       }
     });
   });
