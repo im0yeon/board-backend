@@ -95,12 +95,12 @@
               <tr th:if="${articles.isEmpty()}">
                 <td class="cell-empty" colspan="6">게시글이 없습니다.</td>
               </tr>
-              <tr th:each="article : ${articles.content}">
+              <tr th:each="article, stat : ${articles.content}">
                 <td class="col-check">
                   <input type="checkbox" class="checkbox row-check" th:value="${article.id}"
                          th:attr="aria-label=|${article.id}번 글 선택|">
                 </td>
-                <td class="col-no" th:text="${article.id}">128</td>
+                <td class="col-no" th:text="${articles.totalCnt - ((articles.page - 1) * articles.size + stat.index)}">128</td>
                 <td>
                   <a class="cell-title" th:href="@{/articles/{id}(id=${article.id})}">
                     <span class="badge badge--notice" th:if="${article.notice}">공지</span>

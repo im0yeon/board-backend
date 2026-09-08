@@ -51,7 +51,7 @@
             a.created_at
         FROM article a
         <include refid="searchCondition"/>
-        ORDER BY a.id DESC
+        ORDER BY a.created_at DESC, a.id DESC
         LIMIT #{limit} OFFSET #{offset}
     </select>
 
