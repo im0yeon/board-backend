@@ -53,7 +53,8 @@
             })
             .then(function () {
                 Alert.preset(key + '.success', {
-                    onConfirm: function () { location.href = '/articles'; }
+                    // 등록은 새 글 확인을 위해 1페이지로, 수정은 보던 페이지로 복귀한다
+                    onConfirm: function () { location.href = listUrl(!isEdit); }
                 });
             })
             .catch(function (err) {
@@ -84,6 +85,14 @@
         return data;
     }
 
+    // 검색 조건을 유지한 목록 URL. resetPage가 true면 page를 제거해 1페이지로 보낸다
+    function listUrl(resetPage) {
+        var params = new URLSearchParams(location.search);
+        if (resetPage) params.delete('page');
+        var qs = params.toString();
+        return '/articles' + (qs ? '?' + qs : '');
+    }
+
     // 서버가 사유를 주면 얼럿에 그대로 노출한다
     function failure(reason, status) {
         var err = new Error(reason || ('HTTP ' + status));
@@ -99,7 +108,7 @@
             message: '입력한 내용은 저장되지 않습니다.',
             confirmText: '나가기',
             cancelText: '계속 작성',
-            onConfirm: function () { location.href = '/articles'; }
+            onConfirm: function () { location.href = '/articles' + location.search; }
         });
     });
 })();

@@ -1,6 +1,6 @@
 /* 상세 화면 인터랙션 */
 document.getElementById('btn-edit').addEventListener('click', function () {
-    location.href = '/articles/' + this.dataset.articleId + '/edit';
+    location.href = '/articles/' + this.dataset.articleId + '/edit' + location.search;
 });
 
 /* ---------- 댓글 ---------- */
@@ -109,7 +109,7 @@ document.getElementById('btn-edit').addEventListener('click', function () {
                     })
                     .then(function () {
                         Alert.preset('delete.success', {
-                            onConfirm: function () { location.href = '/articles'; }
+                            onConfirm: function () { location.href = '/articles' + location.search; }
                         });
                     })
                     .catch(function (err) {

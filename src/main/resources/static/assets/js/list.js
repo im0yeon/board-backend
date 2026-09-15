@@ -29,9 +29,9 @@
     if (e.target.classList.contains('row-check')) syncState();
   });
 
-  /* ---------- 등록 ---------- */
+  /* ---------- 등록: 현재 검색 조건을 폼 화면까지 실어 보낸다 ---------- */
   document.getElementById('btn-create').addEventListener('click', function () {
-    location.href = '/articles/new';
+    location.href = '/articles/new' + location.search;
   });
 
   /* ---------- 삭제: 확인 → 완료 / 실패 ---------- */

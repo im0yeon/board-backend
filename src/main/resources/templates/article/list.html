@@ -102,7 +102,7 @@
                 </td>
                 <td class="col-no" th:text="${articles.totalCnt - ((articles.page - 1) * articles.size + stat.index)}">128</td>
                 <td>
-                  <a class="cell-title" th:href="@{|/articles/${article.id}|}">
+                  <a class="cell-title" th:href="@{|/articles/${article.id}|} + ${search.queryString()}">
                     <span class="badge badge--notice" th:if="${article.notice}">공지</span>
                     <span th:text="${article.title}">제목</span>
                   </a>

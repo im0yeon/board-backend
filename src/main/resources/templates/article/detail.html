@@ -95,7 +95,8 @@
         </div>
 
         <div class="content-card__footer">
-          <button type="button" class="btn btn--secondary" th:onclick="|location.href='/articles'|">목록</button>
+          <!-- 상세 URL이 검색 조건 쿼리스트링을 들고 있으므로 그대로 목록에 전달한다 -->
+          <button type="button" class="btn btn--secondary" onclick="location.href='/articles' + location.search">목록</button>
           <div class="spacer"></div>
           <button type="button" class="btn btn--danger-outline" id="btn-delete"
                   th:attr="data-article-id=${article.id}">삭제</button>
