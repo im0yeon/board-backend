@@ -27,7 +27,7 @@ public record PageResponse<T>(
     }
 
     public static <T> PageResponse<T> empty(PageCommand command) {
-        return new PageResponse<>(List.of(), command.page(), command.size(), 0L, 0, false);
+        return new PageResponse<>(List.of(), 1, command.size(), 0L, 0, false);
     }
 
     public <R> PageResponse<R> map(Function<? super T, ? extends R> mapper) {
