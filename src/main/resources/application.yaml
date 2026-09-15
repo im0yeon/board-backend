@@ -6,6 +6,10 @@ spring:
     name: board
   profiles:
     default: local
+  servlet:
+    multipart:
+      max-file-size: 12MB
+      max-request-size: 15MB
   jpa:
     hibernate:
       ddl-auto: validate
@@ -16,6 +20,10 @@ spring:
     baseline-version: 0
     locations: classpath:data/flyway
     validate-on-migrate: true
+
+# 프로젝트 루트 기준 상대 경로
+file:
+  base-dir: files
 
 mybatis:
   type-aliases-package: com.imooyoni.board.data.domain

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('게시판 목록 | Board Admin')}"></head>
+<body>
+<div class="app">
+
+  <!-- ============ Header ============ -->
+  <header th:replace="~{fragments/layout :: header('')}"></header>
+
+  <div class="app-body">
+    <!-- ============ Sidebar ============ -->
+
+    <!-- ============ Main ============ -->
+    <main class="app-main">
+      <div class="page-head page-head--stacked">
+        <nav class="breadcrumb"><span>홈</span><span>콘텐츠 관리</span><span>게시판 관리</span></nav>
+        <h1 class="page-head__title">게시판 관리</h1>
+      </div>
+
+      <form class="page-form" method="get" th:action="@{/articles}">
+      <!-- ---------- 검색 섹션 ---------- -->
+      <section class="panel search-panel">
+        <div class="panel__body">
+          <div class="search-panel__grid">
+            <div class="field">
+              <label class="field__label" for="q-title">제목</label>
+              <input class="input" id="q-title" name="keyword" type="text" placeholder="제목을 입력하세요" th:value="${keyword}">
+            </div>
+            <div class="field">
+              <label class="field__label" for="q-author">작성자</label>
+              <input class="input" id="q-author" name="writer" type="text" placeholder="작성자를 입력하세요" th:value="${writer}">
+            </div>
+            <div class="field">
+              <label class="field__label" for="q-date-from">등록일</label>
+              <div class="date-range">
+                <input class="input" id="q-date-from" name="startDate" type="date" th:value="${startDate}">
+                <span class="date-range__sep">~</span>
+                <input class="input" id="q-date-to" name="endDate" type="date" th:value="${endDate}">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="search-panel__footer">
+          <a class="btn btn--secondary" id="btn-reset" th:href="@{/articles}">초기화</a>
+          <button type="submit" class="btn btn--primary" id="btn-search">
+            <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            검색
+          </button>
+        </div>
+      </section>
+
+      <!-- ---------- 목록 테이블 (이 블록만 스크롤) ---------- -->
+      <section class="table-block">
+        <div class="table-toolbar">
+          <span class="table-toolbar__count">전체 <strong th:text="${articles.totalCnt}">128</strong>건 · <span id="selected-count">0</span>건 선택</span>
+          <div class="table-toolbar__spacer"></div>
+
+          <select class="select select--sm" id="page-size" name="size" aria-label="노출 개수" onchange="this.form.submit()">
+            <option th:each="opt : ${ {10, 20, 50, 100} }"
+                    th:value="${opt}" th:text="|${opt}개씩|"
+                    th:selected="${opt == articles.size}">20개씩</option>
+          </select>
+
+          <span class="table-toolbar__divider"></span>
+
+          <button type="button" class="btn btn--sm btn--danger-outline" id="btn-delete">
+            <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5h16"/><path d="M9.5 6.5V4.5h5v2"/><path d="M6.5 6.5 7.4 20h9.2l.9-13.5"/></svg>
+            삭제
+          </button>
+          <button type="button" class="btn btn--sm btn--primary" id="btn-create">
+            <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+            등록
+          </button>
+        </div>
+
+        <div class="table-scroll">
+          <table class="data-table">
+            <colgroup>
+              <col style="width:44px"><col style="width:64px"><col>
+              <col style="width:72px"><col style="width:120px"><col style="width:132px">
+            </colgroup>
+            <thead>
+              <tr>
+                <th class="col-check" scope="col">
+                  <input type="checkbox" class="checkbox" id="check-all" aria-label="전체 선택">
+                </th>
+                <th class="col-no" scope="col">No</th>
+                <th scope="col">제목</th>
+                <th class="col-comment" scope="col">댓글</th>
+                <th class="col-author" scope="col">작성자</th>
+                <th class="col-date" scope="col">등록일</th>
+              </tr>
+            </thead>
+            <tbody id="table-body">
+              <tr th:if="${articles.isEmpty()}">
+                <td class="cell-empty" colspan="6">게시글이 없습니다.</td>
+              </tr>
+              <tr th:each="article, stat : ${articles.content}">
+                <td class="col-check">
+                  <input type="checkbox" class="checkbox row-check" th:value="${article.id}"
+                         th:attr="aria-label=|${article.id}번 글 선택|">
+                </td>
+                <td class="col-no" th:text="${articles.totalCnt - ((articles.page - 1) * articles.size + stat.index)}">128</td>
+                <td>
+                  <a class="cell-title" th:href="@{/articles/{id}(id=${article.id})}">
+                    <span class="badge badge--notice" th:if="${article.notice}">공지</span>
+                    <span th:text="${article.title}">제목</span>
+                  </a>
+                </td>
+                <td class="col-comment"><span class="cell-comment">0</span></td>
+                <td class="col-author" th:text="${article.writer}">관리자</td>
+                <td class="col-date" th:text="${#temporals.format(article.createdAt, 'yyyy-MM-dd')}">2026-08-28</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ---------- 페이징 ---------- -->
+        <nav class="pagination" aria-label="페이지 이동" th:if="${articles.totalPages > 0}">
+          <button type="submit" name="page" value="1" class="pagination__item"
+                  th:disabled="${articles.page == 1}" aria-label="첫 페이지">&laquo;</button>
+          <button type="submit" name="page" th:value="${articles.page - 1}" class="pagination__item"
+                  th:disabled="${articles.page == 1}" aria-label="이전 페이지">&lsaquo;</button>
+          <button type="submit" name="page" class="pagination__item"
+                  th:each="p : ${#numbers.sequence(articles.startPage(), articles.endPage())}"
+                  th:value="${p}" th:text="${p}"
+                  th:classappend="${p == articles.page} ? 'is-current'"
+                  th:attr="aria-current=${p == articles.page} ? 'page' : null">1</button>
+          <button type="submit" name="page" th:value="${articles.page + 1}" class="pagination__item"
+                  th:disabled="${!articles.hasNext}" aria-label="다음 페이지">&rsaquo;</button>
+          <button type="submit" name="page" th:value="${articles.totalPages}" class="pagination__item"
+                  th:disabled="${articles.page == articles.totalPages}" aria-label="마지막 페이지">&raquo;</button>
+        </nav>
+      </section>
+      </form>
+    </main>
+  </div>
+</div>
+
+<script th:src="@{/assets/js/alert.js}"></script>
+<script th:src="@{/assets/js/list.js}"></script>
+</body>
+</html>

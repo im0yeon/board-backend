@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Board Admin — 와이어프레임')}"></head>
+<body style="display:grid;place-items:center;min-height:100vh;background:var(--bg-body)">
+  <main style="width:100%;max-width:720px;padding:var(--spacing-3xl)">
+    <h1 style="font-size:var(--font-size-3xl);font-weight:700;color:var(--text-strong);margin-bottom:var(--spacing-sm)">Board Admin 와이어프레임</h1>
+    <p class="u-text-muted" style="margin-bottom:var(--spacing-2xl)">게시판 목록 · 상세 · 등록/수정 · 얼럿 9종</p>
+    <div style="display:grid;gap:var(--spacing-md)">
+      <a class="panel" th:href="@{/articles}"      style="display:block;padding:var(--spacing-lg) var(--spacing-xl);text-decoration:none"><strong style="color:var(--text-strong)">목록</strong> <span class="u-text-muted u-text-sm">— 검색 · 툴바 · 테이블 · 페이징</span></a>
+      <a class="panel" th:href="@{/articles/1}"    style="display:block;padding:var(--spacing-lg) var(--spacing-xl);text-decoration:none"><strong style="color:var(--text-strong)">상세</strong> <span class="u-text-muted u-text-sm">— 제목 · 작성자 · 등록일 · 내용 / 수정 · 삭제</span></a>
+      <a class="panel" th:href="@{/articles/new}" style="display:block;padding:var(--spacing-lg) var(--spacing-xl);text-decoration:none"><strong style="color:var(--text-strong)">등록</strong> <span class="u-text-muted u-text-sm">— 저장 · 취소</span></a>
+      <a class="panel" th:href="@{/articles/1/edit}"   style="display:block;padding:var(--spacing-lg) var(--spacing-xl);text-decoration:none"><strong style="color:var(--text-strong)">수정</strong> <span class="u-text-muted u-text-sm">— 기존 값 로드 후 수정</span></a>
+      <a class="panel" th:href="@{/guide/alerts}"    style="display:block;padding:var(--spacing-lg) var(--spacing-xl);text-decoration:none"><strong style="color:var(--text-strong)">얼럿 가이드</strong> <span class="u-text-muted u-text-sm">— 저장/수정/삭제 × 확인/완료/실패</span></a>
+      <a class="panel" th:href="@{/guide/styleguide}" style="display:block;padding:var(--spacing-lg) var(--spacing-xl);text-decoration:none"><strong style="color:var(--text-strong)">스타일 가이드</strong> <span class="u-text-muted u-text-sm">— 컬러 · 타이포 · 컴포넌트 · 스페이싱</span></a>
+    </div>
+  </main>
+</body>
+</html>

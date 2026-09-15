@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head(${article != null} ? '게시글 수정 | Board Admin' : '게시글 등록 | Board Admin')}"></head>
+<body>
+<div class="app">
+  <header th:replace="~{fragments/layout :: header('')}"></header>
+
+  <div class="app-body">
+
+    <main class="app-main">
+      <div class="page-head page-head--stacked">
+        <nav class="breadcrumb"><span>홈</span><span>콘텐츠 관리</span><span>게시판 관리</span><span th:text="${article != null} ? '수정' : '등록'">등록</span></nav>
+        <h1 class="page-head__title" th:text="${article != null} ? '게시글 수정' : '게시글 등록'">게시글 등록</h1>
+      </div>
+
+      <form class="content-card" id="board-form" novalidate th:attr="data-article-id=${article?.id}">
+        <div class="content-card__scroll content-card__scroll--fill">
+          <div class="def-list def-list--fill">
+            <div class="def-row">
+              <div class="def-row__label">제목 <span class="req">*</span></div>
+              <div class="def-row__value">
+                <input class="input" id="f-title" type="text" maxlength="100" placeholder="제목을 입력하세요 (최대 100자)" required
+                       th:value="${article?.title}">
+              </div>
+            </div>
+
+            <div class="def-row def-row--split">
+              <div class="def-row__label">작성자 <span class="req">*</span></div>
+              <div class="def-row__value">
+                <input class="input" id="f-author" type="text" maxlength="20" placeholder="작성자명" required
+                       th:value="${article?.writer}">
+              </div>
+              <div class="def-row__label">등록일</div>
+              <div class="def-row__value">
+                <input class="input" id="f-date" type="date"
+                       th:value="${#temporals.format(article != null ? article.createdAt : #temporals.createToday(), 'yyyy-MM-dd')}">
+              </div>
+            </div>
+
+            <div class="def-row">
+              <div class="def-row__label">공지 설정</div>
+              <div class="def-row__value">
+                <div class="radio-group">
+                  <label class="radio-label">
+                    <input type="radio" class="radio" name="notice" value="normal" th:checked="${article == null or !article.notice}">
+                    <span>일반</span>
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" class="radio" name="notice" value="notice" th:checked="${article != null and article.notice}">
+                    <span>공지</span>
+                  </label>
+                </div>
+                <span class="field__help" style="margin-left:var(--spacing-lg)">공지로 설정하면 목록 상단에 <span class="badge badge--notice">공지</span> 뱃지와 함께 노출됩니다.</span>
+              </div>
+            </div>
+            <div class="def-row def-row--content">
+              <div class="def-row__label">내용 <span class="req">*</span></div>
+              <div class="def-row__value def-row__value--block">
+                <textarea class="textarea" id="f-content" placeholder="내용을 입력하세요" required th:text="${article?.content}"></textarea>
+                <p class="field__help" style="margin-top:8px"><span id="char-count">0</span> / 4000자</p>
+              </div>
+            </div>
+
+            <div class="def-row">
+              <div class="def-row__label">첨부파일</div>
+              <div class="def-row__value">
+                <div th:if="${article?.fileUrl}" style="margin-bottom:var(--spacing-sm)">
+                  <a th:href="${article.fileUrl}" target="_blank">현재 첨부파일 보기</a>
+                  <label class="radio-label" style="margin-left:var(--spacing-lg)">
+                    <input type="checkbox" class="checkbox" id="f-file-remove">
+                    <span>첨부 삭제</span>
+                  </label>
+                </div>
+                <input type="file" id="f-file" style="font-size:var(--font-size-sm)">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-card__footer">
+          <button type="button" class="btn btn--secondary" th:onclick="|location.href='/articles'|">목록</button>
+          <div class="spacer"></div>
+          <button type="button" class="btn btn--secondary" id="btn-cancel">취소</button>
+          <button type="submit" class="btn btn--primary" id="btn-save" th:text="${article != null} ? '수정' : '저장'">저장</button>
+        </div>
+      </form>
+    </main>
+  </div>
+</div>
+
+<script th:src="@{/assets/js/alert.js}"></script>
+<script th:src="@{/assets/js/form.js}"></script>
+</body>
+</html>

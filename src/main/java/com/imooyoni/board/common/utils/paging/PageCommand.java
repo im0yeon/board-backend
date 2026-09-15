@@ -21,12 +21,21 @@ public record PageCommand(int page, int size) {
         return new PageCommand(DEFAULT_PAGE, DEFAULT_SIZE);
     }
 
-    /** Querydsl / JPQL의 offset 값. int 오버플로를 피하기 위해 long으로 계산한다. */
     public long offset() {
         return (long) (page - DEFAULT_PAGE) * size;
     }
 
     public int limit() {
         return size;
+    }
+
+    public int totalPages(long totalElements) {
+        return (int) Math.ceil((double) totalElements / size);
+    }
+
+    /** 마지막 페이지를 넘는 요청을 마지막 페이지로 보정한다. */
+    public PageCommand clampTo(long totalElements) {
+        int totalPages = totalPages(totalElements);
+        return page > totalPages ? new PageCommand(totalPages, size) : this;
     }
 }

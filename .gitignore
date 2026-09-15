@@ -39,3 +39,6 @@ out/
 # 로컬 전용 규칙 파일
 CLAUDE.md
 MY_RULES.md
+
+### 업로드 파일 ###
+files/
