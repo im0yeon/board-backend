@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<body>
+<nav class="pagination" aria-label="페이지 이동" th:fragment="paging(paging)" th:if="${paging.allCount > 0}">
+  <button type="submit" name="page" th:value="${paging.firstPage}" class="pagination__item"
+          th:disabled="${paging.firstPage == 0}" aria-label="첫 페이지">&laquo;</button>
+  <button type="submit" name="page" th:value="${paging.prevPage}" class="pagination__item"
+          th:disabled="${paging.prevPage == 0}" aria-label="이전 페이지">&lsaquo;</button>
+  <button type="submit" name="page" class="pagination__item"
+          th:each="p : ${#numbers.sequence(paging.startPage, paging.endPage)}"
+          th:value="${p}" th:text="${p}"
+          th:classappend="${p == paging.page} ? 'is-current'"
+          th:attr="aria-current=${p == paging.page} ? 'page' : null">1</button>
+  <button type="submit" name="page" th:value="${paging.nextPage}" class="pagination__item"
+          th:disabled="${paging.nextPage == 0}" aria-label="다음 페이지">&rsaquo;</button>
+  <button type="submit" name="page" th:value="${paging.lastPage}" class="pagination__item"
+          th:disabled="${paging.lastPage == 0}" aria-label="마지막 페이지">&raquo;</button>
+</nav>
+</body>
+</html>

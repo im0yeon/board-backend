@@ -9,7 +9,7 @@ version = "0.0.1-SNAPSHOT"
 
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(21)
+		languageVersion = JavaLanguageVersion.of(25)
 	}
 }
 
@@ -18,6 +18,11 @@ configurations.all {
 }
 
 repositories {
+	mavenLocal {
+		metadataSources {
+			gradleMetadata()
+		}
+	}
 	mavenCentral()
 }
 
@@ -45,9 +50,12 @@ dependencies {
 	runtimeOnly("com.mysql:mysql-connector-j")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
+	testImplementation("org.springframework.boot:spring-boot-starter-data-jpa-test")
 	testImplementation("org.mybatis.spring.boot:mybatis-spring-boot-starter-test:4.1.0")
 	testCompileOnly("org.projectlombok:lombok")
 	testAnnotationProcessor("org.projectlombok:lombok")
+
+	implementation("com.fixelsoft.util:fixel-util-spring4-db:20260910")
 }
 
 tasks.withType<Test> {

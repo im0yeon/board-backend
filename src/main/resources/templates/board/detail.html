@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('게시글 상세 | Board Admin')}"></head>
+<body>
+<div class="app">
+  <header th:replace="~{fragments/layout :: header('')}"></header>
+
+  <div class="app-body">
+
+    <main class="app-main">
+      <div class="page-head page-head--stacked">
+        <nav class="breadcrumb"><span>홈</span><span>콘텐츠 관리</span><span>게시판 관리</span><span>상세</span></nav>
+        <h1 class="page-head__title">게시글 상세</h1>
+      </div>
+
+      <section class="content-card">
+        <div class="content-card__scroll">
+          <div class="def-list">
+            <div class="def-row">
+              <div class="def-row__label">제목</div>
+              <div class="def-row__value">
+                <span class="detail-title" th:text="${board.title}">2026년 하반기 시스템 정기 점검 안내</span>
+              </div>
+            </div>
+
+            <div class="def-row def-row--split">
+              <div class="def-row__label">작성자</div>
+              <div class="def-row__value" th:text="${board.writer}">관리자</div>
+              <div class="def-row__label">등록일</div>
+              <div class="def-row__value u-tabular"
+                   th:text="${#temporals.format(board.createdAt, 'yyyy-MM-dd HH:mm')}">2026-08-28 14:22</div>
+            </div>
+
+            <div class="def-row def-row--content">
+              <div class="def-row__label">내용</div>
+              <div class="def-row__value" th:text="${board.content}">내용</div>
+            </div>
+          </div>
+
+          <!-- 댓글 기능 준비 전까지 숨김 -->
+          <section class="comment-section" hidden>
+            <div class="comment-section__head">
+              <h2 class="comment-section__title">댓글 <strong id="comment-count">3</strong></h2>
+            </div>
+
+            <ul class="comment-list" id="comment-list">
+            <li class="comment-item">
+              <div class="comment-item__head">
+                <span class="comment-item__author">김도현</span>
+                <span class="comment-item__date">2026-08-28 15:10</span>
+                <button type="button" class="btn btn--sm btn--ghost comment-item__delete" data-comment-delete>삭제</button>
+              </div>
+              <p class="comment-item__body">점검 시간에 배치 작업이 겹치는데, 배치 스케줄러도 같이 내려가나요?</p>
+            </li>
+            <li class="comment-item">
+              <div class="comment-item__head">
+                <span class="comment-item__author">관리자</span>
+                <span class="comment-item__date">2026-08-28 15:32</span>
+                <button type="button" class="btn btn--sm btn--ghost comment-item__delete" data-comment-delete>삭제</button>
+              </div>
+              <p class="comment-item__body">배치 스케줄러는 점검 대상이 아닙니다.
+다만 알림 발송 서버에 의존하는 배치는 점검 종료 후 순차 처리됩니다.</p>
+            </li>
+            <li class="comment-item">
+              <div class="comment-item__head">
+                <span class="comment-item__author">이수민</span>
+                <span class="comment-item__date">2026-08-29 09:04</span>
+                <button type="button" class="btn btn--sm btn--ghost comment-item__delete" data-comment-delete>삭제</button>
+              </div>
+              <p class="comment-item__body">확인했습니다. CS팀에도 공유해두겠습니다.</p>
+            </li>
+            </ul>
+            <p class="comment-empty" id="comment-empty" hidden>등록된 댓글이 없습니다.</p>
+
+            <div class="comment-form">
+              <div class="comment-form__top">
+                <input class="input comment-form__author" id="comment-author" type="text" maxlength="20" placeholder="작성자">
+              </div>
+              <textarea class="textarea comment-form__body" id="comment-body" maxlength="500" placeholder="댓글을 입력하세요"></textarea>
+              <div class="comment-form__footer">
+                <span class="field__help"><span id="comment-char">0</span> / 500자</span>
+                <button type="button" class="btn btn--primary" id="comment-submit">댓글 등록</button>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div class="content-card__footer">
+          <a class="btn btn--secondary" th:href="@{/board} + '?' + ${paging.getQueryString()}">목록</a>
+          <div class="spacer"></div>
+          <form method="post" id="delete-form" th:action="@{/board/{id}/remove(id=${board.id})} + '?' + ${paging.getQueryString()}">
+            <button type="button" class="btn btn--danger-outline" id="btn-delete">삭제</button>
+          </form>
+          <a class="btn btn--primary" id="btn-edit" th:href="@{/board/{id}/form(id=${board.id})} + '?' + ${paging.getQueryString()}">수정</a>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<script th:src="@{/assets/js/alert.js}"></script>
+<script th:src="@{/assets/js/board-detail.js}"></script>
+</body>
+</html>

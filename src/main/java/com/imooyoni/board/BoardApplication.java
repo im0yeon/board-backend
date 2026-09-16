@@ -1,11 +1,12 @@
 package com.imooyoni.board;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("com.imooyoni.board.data.mapper")
+@MapperScan(basePackages = {"com.imooyoni.board.data.mapper", "com.imooyoni.board.dao"}, annotationClass = Mapper.class)
 public class BoardApplication {
 
 	public static void main(String[] args) {

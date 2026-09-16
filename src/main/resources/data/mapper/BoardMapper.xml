@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imooyoni.board.dao.board.BoardMapper">
+
+    <sql id="default_condition">
+        <where>
+            <if test="paging.searchTitle != null and paging.searchTitle != ''">
+                and title like concat('%', #{paging.searchTitle}, '%')
+            </if>
+            <if test="paging.searchWriter != null and paging.searchWriter != ''">
+                and writer like concat('%', #{paging.searchWriter}, '%')
+            </if>
+            <if test="paging.startDateTime != null">
+                and created_at &gt;= #{paging.startDateTime}
+            </if>
+            <if test="paging.endDateTime != null">
+                and created_at &lt; #{paging.endDateTime}
+            </if>
+        </where>
+    </sql>
+    <select id="countBy" resultType="_long">
+        select count(*)
+        from board
+        <include refid="default_condition"/>
+    </select>
+    <select id="selectBy" resultType="com.imooyoni.board.data.domain.board.Board">
+        select
+        id
+        , title
+        , writer
+        , created_at
+        , updated_at
+        from
+        board
+        <include refid="default_condition"/>
+        order by created_at desc, id desc
+        <if test="paging.paged">
+            <bind name="limit" value="paging.limit()"/>
+            <bind name="offset" value="paging.offset()"/>
+            LIMIT #{limit}
+            OFFSET #{offset}
+        </if>
+    </select>
+    <select id="selectById" resultType="com.imooyoni.board.data.domain.board.Board">
+        select
+        id
+        , title
+        , content
+        , writer
+        , created_at
+        , updated_at
+        from
+        board
+        where id = #{id}
+    </select>
+    <delete id="deleteByPk">
+        delete from
+        board
+        where id = #{id}
+    </delete>
+    <delete id="deleteAllByPk">
+        delete from
+        board
+        where id in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
