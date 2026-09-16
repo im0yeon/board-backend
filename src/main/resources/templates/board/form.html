@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/layout :: head(${board != null} ? '게시글 수정 | Board Admin' : '게시글 등록 | Board Admin')}"></head>
+<head th:replace="~{fragments/layout :: head(${boardId != null} ? '게시글 수정 | Board Admin' : '게시글 등록 | Board Admin')}"></head>
 <body>
 <div class="app">
   <header th:replace="~{fragments/layout :: header('')}"></header>
@@ -9,13 +9,12 @@
 
     <main class="app-main">
       <div class="page-head page-head--stacked">
-        <nav class="breadcrumb"><span>홈</span><span>콘텐츠 관리</span><span>게시판 관리</span><span th:text="${board != null} ? '수정' : '등록'">등록</span></nav>
-        <h1 class="page-head__title" th:text="${board != null} ? '게시글 수정' : '게시글 등록'">게시글 등록</h1>
+        <nav class="breadcrumb"><span>홈</span><span>콘텐츠 관리</span><span>게시판 관리</span><span th:text="${boardId != null} ? '수정' : '등록'">등록</span></nav>
+        <h1 class="page-head__title" th:text="${boardId != null} ? '게시글 수정' : '게시글 등록'">게시글 등록</h1>
       </div>
 
-      <form class="content-card" id="board-form" method="post"
-            th:action="(${board != null} ? @{/board/{id}(id=${board.id})} : @{/board}) + '?' + ${paging.getQueryString()}"
-            th:object="${form}">
+      <form class="content-card" id="board-form" th:object="${form}"
+            th:attr="data-board-id=${boardId}, data-query=${paging.getQueryString()}">
         <div class="content-card__scroll content-card__scroll--fill">
           <div class="def-list def-list--fill">
             <div class="def-row">
@@ -23,7 +22,7 @@
               <div class="def-row__value">
                 <input class="input" type="text" maxlength="200" placeholder="제목을 입력하세요 (최대 200자)" required
                        th:field="*{title}">
-                <p class="field__error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">제목을 입력하세요</p>
+                <p class="field__error" data-error-for="title"></p>
               </div>
             </div>
 
@@ -32,7 +31,7 @@
               <div class="def-row__value">
                 <input class="input" type="text" maxlength="50" placeholder="작성자명" required
                        th:field="*{writer}">
-                <p class="field__error" th:if="${#fields.hasErrors('writer')}" th:errors="*{writer}">작성자를 입력하세요</p>
+                <p class="field__error" data-error-for="writer"></p>
               </div>
             </div>
 
@@ -40,7 +39,7 @@
               <div class="def-row__label">내용 <span class="req">*</span></div>
               <div class="def-row__value def-row__value--block">
                 <textarea class="textarea" placeholder="내용을 입력하세요" required th:field="*{content}"></textarea>
-                <p class="field__error" th:if="${#fields.hasErrors('content')}" th:errors="*{content}">내용을 입력하세요</p>
+                <p class="field__error" data-error-for="content"></p>
               </div>
             </div>
           </div>
@@ -50,12 +49,16 @@
           <a class="btn btn--secondary" th:href="@{/board} + '?' + ${paging.getQueryString()}">목록</a>
           <div class="spacer"></div>
           <a class="btn btn--secondary" id="btn-cancel"
-             th:href="(${board != null} ? @{/board/{id}(id=${board.id})} : @{/board}) + '?' + ${paging.getQueryString()}">취소</a>
-          <button type="submit" class="btn btn--primary" id="btn-save" th:text="${board != null} ? '수정' : '저장'">저장</button>
+             th:href="(${boardId != null} ? @{/board/{id}(id=${boardId})} : @{/board}) + '?' + ${paging.getQueryString()}">취소</a>
+          <button type="submit" class="btn btn--primary" id="btn-save" th:text="${boardId != null} ? '수정' : '저장'">저장</button>
         </div>
       </form>
     </main>
   </div>
 </div>
+
+<script th:src="@{/assets/js/alert.js}"></script>
+<script th:src="@{/assets/js/board-api.js}"></script>
+<script th:src="@{/assets/js/board-form.js}"></script>
 </body>
 </html>

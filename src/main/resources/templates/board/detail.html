@@ -88,9 +88,8 @@
         <div class="content-card__footer">
           <a class="btn btn--secondary" th:href="@{/board} + '?' + ${paging.getQueryString()}">목록</a>
           <div class="spacer"></div>
-          <form method="post" id="delete-form" th:action="@{/board/{id}/remove(id=${board.id})} + '?' + ${paging.getQueryString()}">
-            <button type="button" class="btn btn--danger-outline" id="btn-delete">삭제</button>
-          </form>
+          <button type="button" class="btn btn--danger-outline" id="btn-delete"
+                  th:attr="data-board-id=${board.id}, data-query=${paging.getQueryString()}">삭제</button>
           <a class="btn btn--primary" id="btn-edit" th:href="@{/board/{id}/form(id=${board.id})} + '?' + ${paging.getQueryString()}">수정</a>
         </div>
       </section>
@@ -99,6 +98,7 @@
 </div>
 
 <script th:src="@{/assets/js/alert.js}"></script>
+<script th:src="@{/assets/js/board-api.js}"></script>
 <script th:src="@{/assets/js/board-detail.js}"></script>
 </body>
 </html>

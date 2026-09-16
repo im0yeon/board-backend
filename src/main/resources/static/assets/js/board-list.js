@@ -2,11 +2,10 @@
 (function () {
   'use strict';
 
-  var checkAll   = document.getElementById('check-all');
-  var body       = document.getElementById('table-body');
-  var countEl    = document.getElementById('selected-count');
-  var deleteForm = document.getElementById('delete-form');
-  var rowChecks  = function () { return Array.prototype.slice.call(body.querySelectorAll('.row-check')); };
+  var checkAll  = document.getElementById('check-all');
+  var body      = document.getElementById('table-body');
+  var countEl   = document.getElementById('selected-count');
+  var rowChecks = function () { return Array.prototype.slice.call(body.querySelectorAll('.row-check')); };
 
   function syncState() {
     var rows = rowChecks();
@@ -30,7 +29,7 @@
     if (e.target.classList.contains('row-check')) syncState();
   });
 
-  /* ---------- 삭제: 확인 후 폼 제출 ---------- */
+  /* ---------- 선택 삭제 ---------- */
   document.getElementById('btn-delete').addEventListener('click', function () {
     var checked = rowChecks().filter(function (c) { return c.checked; });
 
@@ -45,7 +44,13 @@
 
     Alert.preset('delete.confirm', {
       message: '선택한 ' + checked.length + '건을 삭제합니다.\n삭제한 게시글은 복구할 수 없습니다.',
-      onConfirm: function () { deleteForm.submit(); }
+      onConfirm: function () {
+        var ids = checked.map(function (c) { return Number(c.value); });
+
+        BoardApi.send('DELETE', '/api/board', { ids: ids })
+          .then(function () { location.reload(); })
+          .catch(function (error) { Alert.preset('delete.fail', { message: error.message }); });
+      }
     });
   });
 

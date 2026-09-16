@@ -97,7 +97,7 @@
               </tr>
               <tr th:each="board, stat : ${paging.body}">
                 <td class="col-check">
-                  <input type="checkbox" class="checkbox row-check" name="ids" form="delete-form" th:value="${board.id}"
+                  <input type="checkbox" class="checkbox row-check" th:value="${board.id}"
                          th:attr="aria-label=|${board.id}번 글 선택|">
                 </td>
                 <td class="col-no" th:text="${paging.allCount - (paging.startRowNum + stat.index)}">128</td>
@@ -119,13 +119,12 @@
       </section>
       </form>
 
-      <!-- 선택 삭제 - 체크박스는 form 속성으로 이 폼에 연결된다 -->
-      <form method="post" id="delete-form" th:action="@{/board/remove} + '?' + ${paging.getQueryString()}"></form>
     </main>
   </div>
 </div>
 
 <script th:src="@{/assets/js/alert.js}"></script>
+<script th:src="@{/assets/js/board-api.js}"></script>
 <script th:src="@{/assets/js/board-list.js}"></script>
 </body>
 </html>
